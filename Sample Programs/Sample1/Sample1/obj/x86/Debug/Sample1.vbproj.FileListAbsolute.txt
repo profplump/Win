@@ -1,0 +1,14 @@
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\bin\Debug\Sample1.exe
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\bin\Debug\Sample1.pdb
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\bin\Debug\Sample1.xml
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\Sample1.Demo.resources
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\Sample1.Resources.resources
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\Sample1.exe
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\Sample1.xml
+C:\Users\Ingyram\AppData\Local\Temporary Projects\Sample1\obj\x86\Debug\Sample1.pdb
+C:\Users\Ingyram\Desktop\Windows Git Repo\Win\Sample Programs\Sample1\Sample1\obj\x86\Debug\Sample1.exe
+C:\Users\Ingyram\Desktop\Windows Git Repo\Win\Sample Programs\Sample1\Sample1\obj\x86\Debug\Sample1.xml
+C:\Users\Ingyram\Desktop\Windows Git Repo\Win\Sample Programs\Sample1\Sample1\obj\x86\Debug\Sample1.pdb
