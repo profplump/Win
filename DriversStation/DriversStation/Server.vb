@@ -3,8 +3,7 @@ Imports DotNetTables.DotNetTable
 Imports DotNetTables.DotNetTables
 Imports System.IO
 
-
-Public Class Client
+Public Class Server
     Implements DotNetTableEvents
 
 
@@ -58,7 +57,5 @@ Public Class Client
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
         Throw New InvalidOperationException("Not supported yet")
     End Sub
-
-
 
 End Class

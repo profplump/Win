@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ServerOutput
+Partial Class Subscribed
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -54,7 +54,7 @@ Partial Class ServerOutput
         Me.StopBtn.Text = "Stop"
         Me.StopBtn.UseVisualStyleBackColor = True
         '
-        'ServerOutput
+        'Subscribed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -62,8 +62,8 @@ Partial Class ServerOutput
         Me.Controls.Add(Me.StopBtn)
         Me.Controls.Add(Me.StartBtn)
         Me.Controls.Add(Me.ServerDGV)
-        Me.Name = "ServerOutput"
-        Me.Text = "Server Output"
+        Me.Name = "Subscribed"
+        Me.Text = "Subscribed to"
         CType(Me.ServerDGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

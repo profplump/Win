@@ -76,11 +76,24 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ServerOutput.vb">
+    <Compile Include="Main.Designer.vb">
+      <DependentUpon>Main.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ServerOutput.Designer.vb">
-      <DependentUpon>ServerOutput.vb</DependentUpon>
+    <Compile Include="Published.Designer.vb">
+      <DependentUpon>Published.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Published.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Server.vb" />
+    <Compile Include="Subscribed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subscribed.Designer.vb">
+      <DependentUpon>Subscribed.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -101,8 +114,14 @@
     <Compile Include="Client.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ServerOutput.resx">
-      <DependentUpon>ServerOutput.vb</DependentUpon>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Published.resx">
+      <DependentUpon>Published.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Subscribed.resx">
+      <DependentUpon>Subscribed.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

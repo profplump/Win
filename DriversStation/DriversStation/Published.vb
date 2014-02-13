@@ -1,11 +1,15 @@
 ﻿Imports DotNetTables
 
-Public Class ServerOutput
+Public Class Published
+
 
     Dim GetClientTable As DotNetTable
     Delegate Sub UpdateDelegate()
     Public Del As UpdateDelegate
 
+    Private Sub Published_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 
     Private Sub StartBtn_Click(sender As Object, e As EventArgs) Handles StartBtn.Click
         Dim MyClient As New Client
@@ -25,4 +29,6 @@ Public Class ServerOutput
     Private Sub StopBtn_Click(sender As Object, e As EventArgs) Handles StopBtn.Click
         Me.Close()
     End Sub
+
+  
 End Class
