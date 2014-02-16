@@ -6,64 +6,57 @@ Imports System.IO
 Public Class Subscribed
     Implements DotNetTableEvents
 
-    Dim GetSubscribedTable As DotNetTable
-    Delegate Sub UpdateDelegate()
-   
-    Private TableName As String
+    Delegate Sub UpdateDelegate(DotNetTable)
+    Public Table As DotNetTable
 
-    Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TableName = Main.TableNameTxt.Text
-        Me.Text = "Subscribed to " & TableName
+    Public Sub New(TableName As String)
+        ' This call is required by the designer.
+        InitializeComponent()
 
-        Subscribe(TableName)
-    End Sub
-
-    Public Sub Subscribe(TableName As String)
         'subscribe to a table
-        Dim SubTable As DotNetTable = DotNetTables.DotNetTables.subscribe(TableName) 'read only
+        Table = DotNetTables.DotNetTables.subscribe(TableName) 'read only
 
         'register for updates from the subscribed table
-        SubTable.onChange(Me)
-        'SubTable.onStale(Me)
+        Table.onChange(Me)
     End Sub
 
-    Public Sub changed(table As DotNetTable) Implements DotNetTableEvents.changed
-        UpdateTable()
+    Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.Text = "Subscribed to " & Table.name
+    End Sub
+
+    Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
+        If Me.InvokeRequired Then
+            Me.Invoke(New UpdateDelegate(AddressOf changed))
+        Else
+            UpdateForm()
+        End If
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
         Throw New InvalidOperationException("Not supported yet")
     End Sub
 
-
-    Public Sub UpdateTable()
-        If Me.InvokeRequired Then
-            Me.Invoke(New UpdateDelegate(AddressOf UpdateTable))
-        Else
-            Dim MyArray As Array
-            GetSubscribedTable = DotNetTables.DotNetTables.findTable(TableName)
-            MyArray = GetSubscribedTable._data.ToArray
-            SubscribedDGV.DataSource = MyArray
-
-            UpdateForm()
-            Logs(MyArray)
-        End If
-    End Sub
-
     Private Sub UpdateForm()
-        GetSubscribedTable = DotNetTables.DotNetTables.findTable(TableName)
-        Me.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & GetSubscribedTable.getInterval
-        Me.ToolStripStatusLabelLast.Text = "Last Update: " & GetSubscribedTable.lastUpdate
+        Dim MyArray As Array
+        MyArray = Table._data.ToArray
+        SubscribedDGV.DataSource = MyArray
+
+        Me.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
+        Me.ToolStripStatusLabelLast.Text = "Last Update: " & Table.lastUpdate
+
+        'Logs(MyArray)
     End Sub
 
     Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        DotNetTables.DotNetTables.drop(TableName)
+        DotNetTables.DotNetTables.drop(Table.name())
     End Sub
 
-    Public Sub Logs(TableArray() As String)
+    Private Sub Logs(TableArray() As String)
         Dim FileName As String = Application.StartupPath & "\NetworkTables.txt"
         IO.File.WriteAllLines(FileName, TableArray)
     End Sub
 
-
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        UpdateForm()
+    End Sub
 End Class

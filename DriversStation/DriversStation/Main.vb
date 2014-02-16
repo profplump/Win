@@ -28,7 +28,7 @@ Public Class Main
     End Sub
 
     Public Sub Start()
-        'Start NetworktTables
+        'Start NetworkTables
         Try
             If ServerMode = True Then
                 DotNetTables.DotNetTables.startServer()
@@ -43,13 +43,13 @@ Public Class Main
     End Sub
 
     Private Sub PublishBtn_Click(sender As Object, e As EventArgs) Handles PublishBtn.Click, PublishToolStripMenuItem.Click
-        Dim PublishedTable As New Published
-        PublishedTable.Show(TableNameTxt.Text)
+        Dim PublishedTable As New Published(TableNameTxt.Text)
+        PublishedTable.Show()
         TableNameTxt.Text = ""
     End Sub
 
     Private Sub SubscribeBtn_Click(sender As Object, e As EventArgs) Handles SubscribeBtn.Click, SubscribeToolStripMenuItem.Click
-        Dim SubscribedTable As New Subscribed
+        Dim SubscribedTable As New Subscribed(TableNameTxt.Text)
         SubscribedTable.Show()
         TableNameTxt.Text = ""
     End Sub

@@ -9,13 +9,18 @@ Public Class Published
     Delegate Sub UpdateDelegate()
     Public Del As UpdateDelegate
 
+    Public PubTable As DotNetTable
     Private TableName As String
 
-    Public Overloads Sub Show(name As String)
-        TableName = name
-        Me.Show()
-    End Sub
+    Public Sub New(Table As String)
 
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        TableName = Table
+        subscribe(TableName)
+    End Sub
     Private Sub Published_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Published " & TableName
 
@@ -27,7 +32,7 @@ Public Class Published
 
     Public Sub Publish(TableName As String)
         'subscribe to a table
-        Dim PubTable As DotNetTable = DotNetTables.DotNetTables.publish(TableName) 'read only
+        PubTable = DotNetTables.DotNetTables.publish(TableName) 'read only
 
         'register for updates from the subscribed table
         PubTable.onChange(Me)

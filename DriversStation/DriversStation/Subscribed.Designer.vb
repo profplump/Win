@@ -26,6 +26,7 @@ Partial Class Subscribed
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.SubscribedDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -41,7 +42,7 @@ Partial Class Subscribed
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 350)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 365)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(634, 22)
         Me.StatusStrip1.TabIndex = 1
@@ -59,11 +60,21 @@ Partial Class Subscribed
         Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(93, 17)
         Me.ToolStripStatusLabelInterval.Text = "Update Interval: "
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(12, 339)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Subscribed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 372)
+        Me.ClientSize = New System.Drawing.Size(634, 387)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.SubscribedDGV)
         Me.Name = "Subscribed"
@@ -79,5 +90,6 @@ Partial Class Subscribed
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents ToolStripStatusLabelLast As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabelInterval As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents Button1 As System.Windows.Forms.Button
 
 End Class
