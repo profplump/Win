@@ -24,13 +24,16 @@ Partial Class Main
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PublishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SubscribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableNameTxt = New System.Windows.Forms.TextBox()
         Me.PublishBtn = New System.Windows.Forms.Button()
         Me.SubscribeBtn = New System.Windows.Forms.Button()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PublishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SubscribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RestoreLastSessionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -50,12 +53,30 @@ Partial Class Main
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
         'EditToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PublishToolStripMenuItem, Me.SubscribeToolStripMenuItem})
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PublishToolStripMenuItem, Me.SubscribeToolStripMenuItem, Me.ToolStripSeparator1, Me.RestoreLastSessionToolStripMenuItem})
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
-        Me.EditToolStripMenuItem.Text = "Edit"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
+        Me.EditToolStripMenuItem.Text = "Tables"
+        '
+        'PublishToolStripMenuItem
+        '
+        Me.PublishToolStripMenuItem.Name = "PublishToolStripMenuItem"
+        Me.PublishToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PublishToolStripMenuItem.Text = "Publish"
+        '
+        'SubscribeToolStripMenuItem
+        '
+        Me.SubscribeToolStripMenuItem.Name = "SubscribeToolStripMenuItem"
+        Me.SubscribeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SubscribeToolStripMenuItem.Text = "Subscribe"
         '
         'TableNameTxt
         '
@@ -82,29 +103,32 @@ Partial Class Main
         Me.SubscribeBtn.Text = "Subscribe"
         Me.SubscribeBtn.UseVisualStyleBackColor = True
         '
-        'ExitToolStripMenuItem
+        'Label1
         '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ExitToolStripMenuItem.Text = "Exit"
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(13, 43)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(68, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "Table Name:"
         '
-        'PublishToolStripMenuItem
+        'ToolStripSeparator1
         '
-        Me.PublishToolStripMenuItem.Name = "PublishToolStripMenuItem"
-        Me.PublishToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PublishToolStripMenuItem.Text = "Publish"
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(176, 6)
         '
-        'SubscribeToolStripMenuItem
+        'RestoreLastSessionToolStripMenuItem
         '
-        Me.SubscribeToolStripMenuItem.Name = "SubscribeToolStripMenuItem"
-        Me.SubscribeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.SubscribeToolStripMenuItem.Text = "Subscribe"
+        Me.RestoreLastSessionToolStripMenuItem.Name = "RestoreLastSessionToolStripMenuItem"
+        Me.RestoreLastSessionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RestoreLastSessionToolStripMenuItem.Text = "Restore Last Session"
         '
         'Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(373, 187)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SubscribeBtn)
         Me.Controls.Add(Me.PublishBtn)
         Me.Controls.Add(Me.TableNameTxt)
@@ -126,4 +150,7 @@ Partial Class Main
     Friend WithEvents TableNameTxt As System.Windows.Forms.TextBox
     Friend WithEvents PublishBtn As System.Windows.Forms.Button
     Friend WithEvents SubscribeBtn As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents RestoreLastSessionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

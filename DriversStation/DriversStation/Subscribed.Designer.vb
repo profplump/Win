@@ -22,54 +22,62 @@ Partial Class Subscribed
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ServerDGV = New System.Windows.Forms.DataGridView()
-        Me.StartBtn = New System.Windows.Forms.Button()
-        Me.StopBtn = New System.Windows.Forms.Button()
-        CType(Me.ServerDGV, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SubscribedDGV = New System.Windows.Forms.DataGridView()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
+        CType(Me.SubscribedDGV, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ServerDGV
+        'SubscribedDGV
         '
-        Me.ServerDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.ServerDGV.Location = New System.Drawing.Point(12, 53)
-        Me.ServerDGV.Name = "ServerDGV"
-        Me.ServerDGV.Size = New System.Drawing.Size(610, 259)
-        Me.ServerDGV.TabIndex = 0
+        Me.SubscribedDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.SubscribedDGV.Location = New System.Drawing.Point(12, 12)
+        Me.SubscribedDGV.Name = "SubscribedDGV"
+        Me.SubscribedDGV.Size = New System.Drawing.Size(610, 323)
+        Me.SubscribedDGV.TabIndex = 0
         '
-        'StartBtn
+        'StatusStrip1
         '
-        Me.StartBtn.Location = New System.Drawing.Point(547, 336)
-        Me.StartBtn.Name = "StartBtn"
-        Me.StartBtn.Size = New System.Drawing.Size(75, 23)
-        Me.StartBtn.TabIndex = 1
-        Me.StartBtn.Text = "Start"
-        Me.StartBtn.UseVisualStyleBackColor = True
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 350)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(634, 22)
+        Me.StatusStrip1.TabIndex = 1
+        Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'StopBtn
+        'ToolStripStatusLabelLast
         '
-        Me.StopBtn.Location = New System.Drawing.Point(456, 336)
-        Me.StopBtn.Name = "StopBtn"
-        Me.StopBtn.Size = New System.Drawing.Size(75, 23)
-        Me.StopBtn.TabIndex = 2
-        Me.StopBtn.Text = "Stop"
-        Me.StopBtn.UseVisualStyleBackColor = True
+        Me.ToolStripStatusLabelLast.Name = "ToolStripStatusLabelLast"
+        Me.ToolStripStatusLabelLast.Size = New System.Drawing.Size(75, 17)
+        Me.ToolStripStatusLabelLast.Text = "Last Update: "
+        '
+        'ToolStripStatusLabelInterval
+        '
+        Me.ToolStripStatusLabelInterval.Name = "ToolStripStatusLabelInterval"
+        Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(93, 17)
+        Me.ToolStripStatusLabelInterval.Text = "Update Interval: "
         '
         'Subscribed
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 371)
-        Me.Controls.Add(Me.StopBtn)
-        Me.Controls.Add(Me.StartBtn)
-        Me.Controls.Add(Me.ServerDGV)
+        Me.ClientSize = New System.Drawing.Size(634, 372)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.SubscribedDGV)
         Me.Name = "Subscribed"
         Me.Text = "Subscribed to"
-        CType(Me.ServerDGV, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SubscribedDGV, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ServerDGV As System.Windows.Forms.DataGridView
-    Friend WithEvents StartBtn As System.Windows.Forms.Button
-    Friend WithEvents StopBtn As System.Windows.Forms.Button
+    Friend WithEvents SubscribedDGV As System.Windows.Forms.DataGridView
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatusLabelLast As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabelInterval As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

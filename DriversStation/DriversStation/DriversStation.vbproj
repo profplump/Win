@@ -82,13 +82,18 @@
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Open.Designer.vb">
+      <DependentUpon>Open.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Open.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Published.Designer.vb">
       <DependentUpon>Published.vb</DependentUpon>
     </Compile>
     <Compile Include="Published.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Server.vb" />
     <Compile Include="Subscribed.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -111,11 +116,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Client.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Open.resx">
+      <DependentUpon>Open.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Published.resx">
       <DependentUpon>Published.vb</DependentUpon>
