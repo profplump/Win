@@ -3,11 +3,8 @@ Imports DotNetTables.DotNetTable
 Imports DotNetTables.DotNetTables
 Imports System.IO
 
-
-'fix updating
 'load last session
 'editing published table - new and existing values
-
 
 Public Class Main
 
@@ -53,6 +50,7 @@ Public Class Main
         SubscribedTable.Show()
         TableNameTxt.Text = ""
     End Sub
+
 
     Private Sub Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing, ExitToolStripMenuItem.Click
         End

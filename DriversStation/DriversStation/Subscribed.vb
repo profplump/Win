@@ -6,9 +6,10 @@ Imports System.IO
 Public Class Subscribed
     Implements DotNetTableEvents
 
-    Delegate Sub UpdateDelegate(DotNetTable)
     Public Table As DotNetTable
+    Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
+    
     Public Sub New(TableName As String)
         ' This call is required by the designer.
         InitializeComponent()
@@ -26,7 +27,7 @@ Public Class Subscribed
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         If Me.InvokeRequired Then
-            Me.Invoke(New UpdateDelegate(AddressOf changed))
+            Me.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
             UpdateForm()
         End If
@@ -56,7 +57,4 @@ Public Class Subscribed
         IO.File.WriteAllLines(FileName, TableArray)
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        UpdateForm()
-    End Sub
 End Class
