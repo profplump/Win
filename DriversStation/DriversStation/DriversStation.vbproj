@@ -88,12 +88,6 @@
     <Compile Include="Open.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Published.Designer.vb">
-      <DependentUpon>Published.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Published.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Subscribed.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -123,9 +117,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Open.resx">
       <DependentUpon>Open.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Published.resx">
-      <DependentUpon>Published.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Subscribed.resx">
       <DependentUpon>Subscribed.vb</DependentUpon>

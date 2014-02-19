@@ -21,11 +21,6 @@ Public Class Subscribed
         Table.onChange(Me)
     End Sub
 
-    Public Sub New()
-        ' This call is required by the designer.
-        InitializeComponent()
-    End Sub
-
     Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = "Subscribed to " & Table.name
     End Sub
