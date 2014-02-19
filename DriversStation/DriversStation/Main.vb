@@ -13,9 +13,11 @@ Public Class Main
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ModeSelect As New Open
-        If ModeSelect.ShowDialog() = DialogResult.Abort Then
-            Main_FormClosing(sender, e)
-        End If
+        ModeSelect.ShowDialog()
+
+        '= DialogResult.Abort Then
+        '    Main_FormClosing(sender, e)
+        'End If
 
         ServerMode = My.Settings.ServerMode
         If ServerMode = True Then
@@ -43,13 +45,13 @@ Public Class Main
     End Sub
 
     Private Sub PublishBtn_Click(sender As Object, e As EventArgs) Handles PublishBtn.Click, PublishToolStripMenuItem.Click
-        Dim PublishedTable As New Published(TableNameTxt.Text)
+        Dim PublishedTable As New Tables(TableNameTxt.Text, True)
         PublishedTable.Show()
         TableNameTxt.Text = ""
     End Sub
 
     Private Sub SubscribeBtn_Click(sender As Object, e As EventArgs) Handles SubscribeBtn.Click, SubscribeToolStripMenuItem.Click
-        Dim SubscribedTable As New Subscribed(TableNameTxt.Text)
+        Dim SubscribedTable As New Tables(TableNameTxt.Text, False)
         SubscribedTable.Show()
         TableNameTxt.Text = ""
     End Sub

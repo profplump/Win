@@ -88,11 +88,11 @@
     <Compile Include="Open.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Subscribed.vb">
+    <Compile Include="Tables.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Subscribed.Designer.vb">
-      <DependentUpon>Subscribed.vb</DependentUpon>
+    <Compile Include="Tables.Designer.vb">
+      <DependentUpon>Tables.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -118,8 +118,8 @@
     <EmbeddedResource Include="Open.resx">
       <DependentUpon>Open.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Subscribed.resx">
-      <DependentUpon>Subscribed.vb</DependentUpon>
+    <EmbeddedResource Include="Tables.resx">
+      <DependentUpon>Tables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
