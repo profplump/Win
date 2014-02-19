@@ -4,7 +4,6 @@ Imports DotNetTables.DotNetTables
 Imports System.IO
 
 'load last session
-'editing published table - new and existing values
 'logging
 
 Public Class Main

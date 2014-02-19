@@ -24,40 +24,39 @@ Partial Class Tables
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TableDGV = New System.Windows.Forms.DataGridView()
-        Me.Key = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Value = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteRowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.IntervalTxt = New System.Windows.Forms.TextBox()
         Me.IntervalBtn = New System.Windows.Forms.Button()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteRowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.TableDGV, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableDGV
         '
         Me.TableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TableDGV.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Key, Me.Value})
         Me.TableDGV.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TableDGV.Location = New System.Drawing.Point(12, 12)
         Me.TableDGV.Name = "TableDGV"
         Me.TableDGV.Size = New System.Drawing.Size(610, 323)
         Me.TableDGV.TabIndex = 0
         '
-        'Key
+        'ContextMenuStrip1
         '
-        Me.Key.HeaderText = "Key"
-        Me.Key.Name = "Key"
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteRowToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(134, 26)
         '
-        'Value
+        'DeleteRowToolStripMenuItem
         '
-        Me.Value.HeaderText = "Value"
-        Me.Value.Name = "Value"
+        Me.DeleteRowToolStripMenuItem.Name = "DeleteRowToolStripMenuItem"
+        Me.DeleteRowToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.DeleteRowToolStripMenuItem.Text = "Delete Row"
         '
         'StatusStrip1
         '
@@ -105,18 +104,6 @@ Partial Class Tables
         Me.IntervalBtn.Text = "Update"
         Me.IntervalBtn.UseVisualStyleBackColor = True
         '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteRowToolStripMenuItem})
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(134, 26)
-        '
-        'DeleteRowToolStripMenuItem
-        '
-        Me.DeleteRowToolStripMenuItem.Name = "DeleteRowToolStripMenuItem"
-        Me.DeleteRowToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DeleteRowToolStripMenuItem.Text = "Delete Row"
-        '
         'Tables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -130,9 +117,9 @@ Partial Class Tables
         Me.Name = "Tables"
         Me.Text = "Subscribed to"
         CType(Me.TableDGV, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
-        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -145,8 +132,6 @@ Partial Class Tables
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents IntervalTxt As System.Windows.Forms.TextBox
     Friend WithEvents IntervalBtn As System.Windows.Forms.Button
-    Friend WithEvents Key As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Value As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DeleteRowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 

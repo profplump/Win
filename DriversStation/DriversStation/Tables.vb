@@ -32,12 +32,27 @@ Public Class Tables
             Label1.Visible = True
             IntervalBtn.Visible = True
             IntervalTxt.Visible = True
+            'add column headers
+            Dim Key As New DataGridViewTextBoxColumn
+            key.Name = "Key"
+            key.HeaderText = "Key"
+            key.DataPropertyName = "Key"
+            Dim Value As New DataGridViewTextBoxColumn
+            Value.Name = "Value"
+            Value.HeaderText = "Value"
+            Value.DataPropertyName = "Value"
+            TableDGV.Columns.Add(Key)
+            TableDGV.Columns.Add(Value)
+            'enable editing
+            TableDGV.ReadOnly = False
         Else
             Me.Text = "Subscribed to " & Table.name
             'hide published controls
             Label1.Visible = False
             IntervalBtn.Visible = False
             IntervalTxt.Visible = False
+            'disable editing
+            TableDGV.ReadOnly = True
         End If
     End Sub
 
