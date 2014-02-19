@@ -9,7 +9,7 @@ Public Class Subscribed
     Public Table As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
-    
+
     Public Sub New(TableName As String)
         ' This call is required by the designer.
         InitializeComponent()
@@ -19,6 +19,11 @@ Public Class Subscribed
 
         'register for updates from the subscribed table
         Table.onChange(Me)
+    End Sub
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
     End Sub
 
     Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -5,6 +5,7 @@ Imports System.IO
 
 'load last session
 'editing published table - new and existing values
+'logging
 
 Public Class Main
 
@@ -12,7 +13,9 @@ Public Class Main
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ModeSelect As New Open
-        ModeSelect.ShowDialog()
+        If ModeSelect.ShowDialog() = DialogResult.Abort Then
+            Main_FormClosing(sender, e)
+        End If
 
         ServerMode = My.Settings.ServerMode
         If ServerMode = True Then
