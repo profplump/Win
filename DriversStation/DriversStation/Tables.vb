@@ -2,6 +2,7 @@
 Imports DotNetTables.DotNetTable
 Imports DotNetTables.DotNetTables
 Imports System.IO
+Imports System.Threading
 
 Public Class Tables
     Implements DotNetTableEvents
@@ -32,6 +33,7 @@ Public Class Tables
             Label1.Visible = True
             IntervalBtn.Visible = True
             IntervalTxt.Visible = True
+
             'add column headers
             Dim Key As New DataGridViewTextBoxColumn
             key.Name = "Key"
@@ -43,6 +45,7 @@ Public Class Tables
             Value.DataPropertyName = "Value"
             TableDGV.Columns.Add(Key)
             TableDGV.Columns.Add(Value)
+
             'enable editing
             TableDGV.ReadOnly = False
         Else
@@ -58,6 +61,7 @@ Public Class Tables
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         If Me.InvokeRequired Then
+            Logs(EventTable)
             Me.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
             UpdateForm()
@@ -73,19 +77,19 @@ Public Class Tables
         MyArray = Table._data.ToArray
         TableDGV.DataSource = MyArray
 
+        Dim StartDate As New DateTime(1970, 1, 1)
         Me.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
-        Me.ToolStripStatusLabelLast.Text = "Last Update: " & Table.lastUpdate
-
-        'Logs(MyArray)
+        Me.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate)
     End Sub
 
-    Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        DotNetTables.DotNetTables.drop(Table.name())
-    End Sub
-
-    Private Sub Logs(TableArray() As String)
-        Dim FileName As String = Application.StartupPath & "\NetworkTables.txt"
-        IO.File.WriteAllLines(FileName, TableArray)
+    Private Sub Logs(TableData As DotNetTable)
+        Dim OutputString As String = ""
+        For Each item As String In TableData.Keys
+            OutputString = OutputString & "|" & item & " => " & TableData.getValue(item)
+        Next
+        Dim FileName As String = Application.StartupPath & "\" & Table.name & ".txt"
+        File.AppendAllText(FileName, Environment.NewLine & Now)
+        File.AppendAllText(FileName, Environment.NewLine & OutputString)
     End Sub
 
     Private Sub TableDGV_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles TableDGV.CellEndEdit
@@ -106,6 +110,10 @@ Public Class Tables
             Table.remove(row.Cells("Key").Value.ToString)
             TableDGV.Rows.Remove(row)
         Next
+    End Sub
+
+    Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        DotNetTables.DotNetTables.drop(Table.name())
     End Sub
 
 End Class

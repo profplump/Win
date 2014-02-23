@@ -20,6 +20,7 @@ Public Class Open
             My.Settings.IP = IPTxt.Text
             My.Settings.Save()
 
+            Me.DialogResult = Windows.Forms.DialogResult.OK
             Me.Close()
         End If
     End Sub
@@ -40,10 +41,5 @@ Public Class Open
         End If
     End Sub
 
-    Private Sub Open_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If e.CloseReason = CloseReason.UserClosing Then
-            Me.DialogResult = DialogResult.Abort
-        End If
-    End Sub
 
 End Class

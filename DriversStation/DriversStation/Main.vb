@@ -12,11 +12,12 @@ Public Class Main
 
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles Me.Load
         Dim ModeSelect As New Open
-        ModeSelect.ShowDialog()
+        Dim MyResult As DialogResult
+        MyResult = ModeSelect.ShowDialog()
 
-        '= DialogResult.Abort Then
-        '    Main_FormClosing(sender, e)
-        'End If
+        If MyResult <> Windows.Forms.DialogResult.OK Then
+            Me.Close()
+        End If
 
         ServerMode = My.Settings.ServerMode
         If ServerMode = True Then
