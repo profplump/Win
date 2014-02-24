@@ -20,19 +20,20 @@ Public Class Tables
         Else
             'subscribe to a table
             Table = DotNetTables.DotNetTables.subscribe(TableName) 'read only
+            'register for the onStale event for subscribed tables
+            Table.onStale(Me)
+            'register for updates from the table
+            Table.onChange(Me)
         End If
-
-        'register for updates from the subscribed table
-        Table.onChange(Me)
     End Sub
 
     Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Table.iswritable = True Then
             Me.Text = "Published " & Table.name
-            'show published controls
-            Label1.Visible = True
-            IntervalBtn.Visible = True
-            IntervalTxt.Visible = True
+            'show published controls 'hiding for now
+            Label1.Visible = False
+            IntervalBtn.Visible = False
+            IntervalTxt.Visible = False
 
             'add column headers
             Dim Key As New DataGridViewTextBoxColumn
@@ -69,27 +70,31 @@ Public Class Tables
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
-        Throw New InvalidOperationException("Not supported yet")
+        Me.ToolStripStatusStale.Text = "Table is stale."
     End Sub
 
     Private Sub UpdateForm()
         Dim MyArray As Array
         MyArray = Table._data.ToArray
         TableDGV.DataSource = MyArray
+        UpdateLabels()
+    End Sub
 
+    Private Sub UpdateLabels()
         Dim StartDate As New DateTime(1970, 1, 1)
         Me.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
         Me.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate)
+        Me.ToolStripStatusStale.Text = ""
     End Sub
 
     Private Sub Logs(TableData As DotNetTable)
         Dim OutputString As String = ""
         For Each item As String In TableData.Keys
-            OutputString = OutputString & "|" & item & " => " & TableData.getValue(item)
+            OutputString = OutputString & item & "|" & TableData.getValue(item) & Environment.NewLine
         Next
         Dim FileName As String = Application.StartupPath & "\" & Table.name & ".txt"
-        File.AppendAllText(FileName, Environment.NewLine & Now)
-        File.AppendAllText(FileName, Environment.NewLine & OutputString)
+        File.AppendAllText(FileName, Environment.NewLine & Now & Environment.NewLine)
+        File.AppendAllText(FileName, OutputString)
     End Sub
 
     Private Sub TableDGV_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles TableDGV.CellEndEdit
@@ -100,15 +105,43 @@ Public Class Tables
         Value = TableDGV.CurrentRow.Cells("Value").Value
 
         If Key <> "" Then
+            If Table.exists(Key) = True Then
+                For Each row As DataGridViewRow In TableDGV.Rows
+                    If row.Index <> TableDGV.CurrentRow.Index Then
+                        If row.Cells("Key").Value = Key Then
+                            MsgBox("This key alredy exists.", MsgBoxStyle.Exclamation, "Duplicate Key")
+                            TableDGV.Rows.Remove(TableDGV.CurrentRow)
+                            Exit Sub
+                        End If
+                    End If
+                Next
+            End If
+
             Table.setValue(Key, Value)
+            SendData()
         End If
+    End Sub
+
+    Private Sub SendData()
+        Table.send()
+        UpdateLabels()
+        Logs(Table)
     End Sub
 
     Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowToolStripMenuItem.Click
         'remove rows
         For Each row In TableDGV.SelectedRows
-            Table.remove(row.Cells("Key").Value.ToString)
-            TableDGV.Rows.Remove(row)
+            Try
+                Table.remove(row.Cells("Key").Value.ToString)
+            Catch ex As Exception
+            Finally
+                'want to remove row from dgv anyway
+                Try
+                    TableDGV.Rows.Remove(row)
+                Catch ex As Exception
+                    'do nothing if it fails
+                End Try
+            End Try
         Next
     End Sub
 
@@ -116,4 +149,13 @@ Public Class Tables
         DotNetTables.DotNetTables.drop(Table.name())
     End Sub
 
+    Private Sub IntervalBtn_Click(sender As Object, e As EventArgs) Handles IntervalBtn.Click
+        Dim UpdateInterval As String
+        UpdateInterval = IntervalTxt.Text
+        If IsNumeric(UpdateInterval) Then
+            Table.setInterval(UpdateInterval)
+        Else
+            MsgBox("Update Interval must be numeric.", MsgBoxStyle.Exclamation, "Invalid Input")
+        End If
+    End Sub
 End Class

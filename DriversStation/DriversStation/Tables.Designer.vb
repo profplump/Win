@@ -32,6 +32,7 @@ Partial Class Tables
         Me.Label1 = New System.Windows.Forms.Label()
         Me.IntervalTxt = New System.Windows.Forms.TextBox()
         Me.IntervalBtn = New System.Windows.Forms.Button()
+        Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
         CType(Me.TableDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -60,8 +61,8 @@ Partial Class Tables
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 378)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval, Me.ToolStripStatusStale})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 345)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(634, 22)
         Me.StatusStrip1.TabIndex = 1
@@ -87,6 +88,7 @@ Partial Class Tables
         Me.Label1.Size = New System.Drawing.Size(83, 13)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Update Interval:"
+        Me.Label1.Visible = False
         '
         'IntervalTxt
         '
@@ -94,6 +96,7 @@ Partial Class Tables
         Me.IntervalTxt.Name = "IntervalTxt"
         Me.IntervalTxt.Size = New System.Drawing.Size(87, 20)
         Me.IntervalTxt.TabIndex = 3
+        Me.IntervalTxt.Visible = False
         '
         'IntervalBtn
         '
@@ -103,12 +106,20 @@ Partial Class Tables
         Me.IntervalBtn.TabIndex = 7
         Me.IntervalBtn.Text = "Update"
         Me.IntervalBtn.UseVisualStyleBackColor = True
+        Me.IntervalBtn.Visible = False
+        '
+        'ToolStripStatusStale
+        '
+        Me.ToolStripStatusStale.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripStatusStale.ForeColor = System.Drawing.Color.Red
+        Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
+        Me.ToolStripStatusStale.Size = New System.Drawing.Size(0, 17)
         '
         'Tables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(634, 400)
+        Me.ClientSize = New System.Drawing.Size(634, 367)
         Me.Controls.Add(Me.IntervalBtn)
         Me.Controls.Add(Me.IntervalTxt)
         Me.Controls.Add(Me.Label1)
@@ -134,5 +145,6 @@ Partial Class Tables
     Friend WithEvents IntervalBtn As System.Windows.Forms.Button
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DeleteRowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripStatusStale As System.Windows.Forms.ToolStripStatusLabel
 
 End Class

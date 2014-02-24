@@ -3,8 +3,6 @@ Imports DotNetTables.DotNetTable
 Imports DotNetTables.DotNetTables
 Imports System.IO
 
-'load last session
-'logging
 
 Public Class Main
 
