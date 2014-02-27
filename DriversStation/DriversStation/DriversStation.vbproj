@@ -76,6 +76,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DriversStation.Designer.vb">
+      <DependentUpon>DriversStation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DriversStation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.Designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
@@ -87,6 +93,12 @@
     </Compile>
     <Compile Include="Open.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenControl.Designer.vb">
+      <DependentUpon>OpenControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OpenControl.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Tables.vb">
       <SubType>Form</SubType>
@@ -112,11 +124,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DriversStation.resx">
+      <DependentUpon>DriversStation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Open.resx">
       <DependentUpon>Open.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenControl.resx">
+      <DependentUpon>OpenControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tables.resx">
       <DependentUpon>Tables.vb</DependentUpon>
