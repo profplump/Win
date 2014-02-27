@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Main
+Partial Class NewTable
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -28,12 +28,12 @@ Partial Class Main
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PublishToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SubscribeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.RestoreLastSessionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TableNameTxt = New System.Windows.Forms.TextBox()
         Me.PublishBtn = New System.Windows.Forms.Button()
         Me.SubscribeBtn = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.RestoreLastSessionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -57,7 +57,7 @@ Partial Class Main
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ExitToolStripMenuItem.Text = "Exit"
+        Me.ExitToolStripMenuItem.Text = "Close"
         '
         'EditToolStripMenuItem
         '
@@ -69,14 +69,25 @@ Partial Class Main
         'PublishToolStripMenuItem
         '
         Me.PublishToolStripMenuItem.Name = "PublishToolStripMenuItem"
-        Me.PublishToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PublishToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.PublishToolStripMenuItem.Text = "Publish"
         '
         'SubscribeToolStripMenuItem
         '
         Me.SubscribeToolStripMenuItem.Name = "SubscribeToolStripMenuItem"
-        Me.SubscribeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SubscribeToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
         Me.SubscribeToolStripMenuItem.Text = "Subscribe"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(176, 6)
+        '
+        'RestoreLastSessionToolStripMenuItem
+        '
+        Me.RestoreLastSessionToolStripMenuItem.Name = "RestoreLastSessionToolStripMenuItem"
+        Me.RestoreLastSessionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+        Me.RestoreLastSessionToolStripMenuItem.Text = "Restore Last Session"
         '
         'TableNameTxt
         '
@@ -87,7 +98,7 @@ Partial Class Main
         '
         'PublishBtn
         '
-        Me.PublishBtn.Location = New System.Drawing.Point(203, 152)
+        Me.PublishBtn.Location = New System.Drawing.Point(205, 106)
         Me.PublishBtn.Name = "PublishBtn"
         Me.PublishBtn.Size = New System.Drawing.Size(75, 23)
         Me.PublishBtn.TabIndex = 3
@@ -96,7 +107,7 @@ Partial Class Main
         '
         'SubscribeBtn
         '
-        Me.SubscribeBtn.Location = New System.Drawing.Point(286, 152)
+        Me.SubscribeBtn.Location = New System.Drawing.Point(286, 106)
         Me.SubscribeBtn.Name = "SubscribeBtn"
         Me.SubscribeBtn.Size = New System.Drawing.Size(75, 23)
         Me.SubscribeBtn.TabIndex = 4
@@ -112,29 +123,18 @@ Partial Class Main
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Table Name:"
         '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(176, 6)
-        '
-        'RestoreLastSessionToolStripMenuItem
-        '
-        Me.RestoreLastSessionToolStripMenuItem.Name = "RestoreLastSessionToolStripMenuItem"
-        Me.RestoreLastSessionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.RestoreLastSessionToolStripMenuItem.Text = "Restore Last Session"
-        '
-        'Main
+        'Debug
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(373, 187)
+        Me.ClientSize = New System.Drawing.Size(373, 150)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.SubscribeBtn)
         Me.Controls.Add(Me.PublishBtn)
         Me.Controls.Add(Me.TableNameTxt)
         Me.Controls.Add(Me.MenuStrip1)
-        Me.Name = "Main"
-        Me.Text = "Main"
+        Me.Name = "Debug"
+        Me.Text = "Display Table"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)

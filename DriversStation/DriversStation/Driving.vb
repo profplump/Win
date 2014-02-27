@@ -4,30 +4,16 @@ Imports DotNetTables.DotNetTables
 Imports System.IO
 Imports System.Threading
 
-Public Class Tables
+Public Class Driving
     Implements DotNetTableEvents
 
+    Public SubTable As DotNetTable
     Public Table As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
-    Public Sub New(TableName As String, IsPublished As Boolean)
-        ' This call is required by the designer.
-        InitializeComponent()
+#Region "Load"
 
-        If IsPublished = True Then
-            'publish to a table
-            Table = DotNetTables.DotNetTables.publish(TableName) 'read only
-        Else
-            'subscribe to a table
-            Table = DotNetTables.DotNetTables.subscribe(TableName) 'read only
-            'register for the onStale event for subscribed tables
-            Table.onStale(Me)
-            'register for updates from the table
-            Table.onChange(Me)
-        End If
-    End Sub
-
-    Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub Driving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Table.iswritable = True Then
             Me.Text = "Published " & Table.name
             'show published controls 'hiding for now
@@ -37,9 +23,9 @@ Public Class Tables
 
             'add column headers
             Dim Key As New DataGridViewTextBoxColumn
-            key.Name = "Key"
-            key.HeaderText = "Key"
-            key.DataPropertyName = "Key"
+            Key.Name = "Key"
+            Key.HeaderText = "Key"
+            Key.DataPropertyName = "Key"
             Dim Value As New DataGridViewTextBoxColumn
             Value.Name = "Value"
             Value.HeaderText = "Value"
@@ -60,6 +46,14 @@ Public Class Tables
         End If
     End Sub
 
+
+    Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        DotNetTables.DotNetTables.drop(Table.name())
+    End Sub
+#End Region
+
+
+#Region "Subscribed"
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         If Me.InvokeRequired Then
             Logs(EventTable)
@@ -70,10 +64,11 @@ Public Class Tables
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
-        Me.ToolStripStatusStale.Text = "Table is stale."
+        DriversStation.ToolStripStatusStale.Text = "Table is stale."
     End Sub
 
     Private Sub UpdateForm()
+        'todo: update form based on table
         Dim MyArray As Array
         MyArray = Table._data.ToArray
         TableDGV.DataSource = MyArray
@@ -82,9 +77,9 @@ Public Class Tables
 
     Private Sub UpdateLabels()
         Dim StartDate As New DateTime(1970, 1, 1)
-        Me.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
-        Me.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate)
-        Me.ToolStripStatusStale.Text = ""
+        DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
+        DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate)
+        DriversStation.ToolStripStatusStale.Text = ""
     End Sub
 
     Private Sub Logs(TableData As DotNetTable)
@@ -96,7 +91,10 @@ Public Class Tables
         File.AppendAllText(FileName, Environment.NewLine & Now & Environment.NewLine)
         File.AppendAllText(FileName, OutputString)
     End Sub
+#End Region
 
+
+#Region "Published"
     Private Sub TableDGV_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles TableDGV.CellEndEdit
         Dim Key As String
         Dim Value As String
@@ -118,14 +116,14 @@ Public Class Tables
             End If
 
             Table.setValue(Key, Value)
-            SendData()
+            SendData(Table)
         End If
     End Sub
 
-    Private Sub SendData()
-        Table.send()
+    Private Sub SendData(SendTable As DotNetTable)
+        SendTable.send()
         UpdateLabels()
-        Logs(Table)
+        Logs(SendTable)
     End Sub
 
     Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowToolStripMenuItem.Click
@@ -145,10 +143,6 @@ Public Class Tables
         Next
     End Sub
 
-    Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        DotNetTables.DotNetTables.drop(Table.name())
-    End Sub
-
     Private Sub IntervalBtn_Click(sender As Object, e As EventArgs) Handles IntervalBtn.Click
         Dim UpdateInterval As String
         UpdateInterval = IntervalTxt.Text
@@ -158,11 +152,7 @@ Public Class Tables
             MsgBox("Update Interval must be numeric.", MsgBoxStyle.Exclamation, "Invalid Input")
         End If
     End Sub
+#End Region
 
-    Private Sub NewTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewTableToolStripMenuItem.Click
-        If DriversStation.OpenTables Is Nothing Then
-            DriversStation.OpenTables = New NewTable
-        End If
-        DriversStation.OpenTables.Show()
-    End Sub
+
 End Class

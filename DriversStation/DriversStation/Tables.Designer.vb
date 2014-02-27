@@ -29,13 +29,17 @@ Partial Class Tables
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.IntervalTxt = New System.Windows.Forms.TextBox()
         Me.IntervalBtn = New System.Windows.Forms.Button()
-        Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NewTableToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.TableDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableDGV
@@ -80,6 +84,13 @@ Partial Class Tables
         Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(93, 17)
         Me.ToolStripStatusLabelInterval.Text = "Update Interval: "
         '
+        'ToolStripStatusStale
+        '
+        Me.ToolStripStatusStale.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ToolStripStatusStale.ForeColor = System.Drawing.Color.Red
+        Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
+        Me.ToolStripStatusStale.Size = New System.Drawing.Size(0, 17)
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -108,12 +119,27 @@ Partial Class Tables
         Me.IntervalBtn.UseVisualStyleBackColor = True
         Me.IntervalBtn.Visible = False
         '
-        'ToolStripStatusStale
+        'MenuStrip1
         '
-        Me.ToolStripStatusStale.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ToolStripStatusStale.ForeColor = System.Drawing.Color.Red
-        Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
-        Me.ToolStripStatusStale.Size = New System.Drawing.Size(0, 17)
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(634, 24)
+        Me.MenuStrip1.TabIndex = 8
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewTableToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'NewTableToolStripMenuItem
+        '
+        Me.NewTableToolStripMenuItem.Name = "NewTableToolStripMenuItem"
+        Me.NewTableToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewTableToolStripMenuItem.Text = "&New Table"
         '
         'Tables
         '
@@ -124,13 +150,17 @@ Partial Class Tables
         Me.Controls.Add(Me.IntervalTxt)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.MenuStrip1)
         Me.Controls.Add(Me.TableDGV)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Tables"
         Me.Text = "Subscribed to"
         CType(Me.TableDGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -146,5 +176,8 @@ Partial Class Tables
     Friend WithEvents ContextMenuStrip1 As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DeleteRowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripStatusStale As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NewTableToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

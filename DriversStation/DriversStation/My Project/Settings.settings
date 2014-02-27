@@ -14,5 +14,11 @@
     <Setting Name="SubTables" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ParametersName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">"RobotTable"</Value>
+    </Setting>
+    <Setting Name="ParametersTable" Type="DotNetTables.DotNetTables" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

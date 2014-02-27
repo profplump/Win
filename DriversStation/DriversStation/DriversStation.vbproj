@@ -82,16 +82,16 @@
     <Compile Include="DriversStation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.vb">
-      <DependentUpon>Main.vb</DependentUpon>
+    <Compile Include="Driving.Designer.vb">
+      <DependentUpon>Driving.vb</DependentUpon>
     </Compile>
-    <Compile Include="Main.vb">
-      <SubType>Form</SubType>
+    <Compile Include="Driving.vb">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Open.Designer.vb">
-      <DependentUpon>Open.vb</DependentUpon>
+    <Compile Include="NewTable.Designer.vb">
+      <DependentUpon>NewTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Open.vb">
+    <Compile Include="NewTable.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="OpenControl.Designer.vb">
@@ -127,11 +127,11 @@
     <EmbeddedResource Include="DriversStation.resx">
       <DependentUpon>DriversStation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.vb</DependentUpon>
+    <EmbeddedResource Include="Driving.resx">
+      <DependentUpon>Driving.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Open.resx">
-      <DependentUpon>Open.vb</DependentUpon>
+    <EmbeddedResource Include="NewTable.resx">
+      <DependentUpon>NewTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OpenControl.resx">
       <DependentUpon>OpenControl.vb</DependentUpon>

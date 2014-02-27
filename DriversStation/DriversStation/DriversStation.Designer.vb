@@ -26,7 +26,13 @@ Partial Class DriversStation
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MainPanel = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.OpenDebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddInputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.MainPanel.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -34,7 +40,7 @@ Partial Class DriversStation
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(642, 24)
@@ -43,6 +49,7 @@ Partial Class DriversStation
         '
         'FileToolStripMenuItem
         '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenDebugToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -58,18 +65,55 @@ Partial Class DriversStation
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel1})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatus, Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval, Me.ToolStripStatusStale})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 309)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(642, 22)
         Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolStripStatusLabel1
+        'ToolStripStatus
         '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(121, 17)
-        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        Me.ToolStripStatus.Name = "ToolStripStatus"
+        Me.ToolStripStatus.Size = New System.Drawing.Size(121, 17)
+        Me.ToolStripStatus.Text = "ToolStripStatusLabel1"
+        '
+        'ToolStripStatusLabelInterval
+        '
+        Me.ToolStripStatusLabelInterval.Name = "ToolStripStatusLabelInterval"
+        Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(87, 17)
+        Me.ToolStripStatusLabelInterval.Text = "Update Interval"
+        '
+        'ToolStripStatusLabelLast
+        '
+        Me.ToolStripStatusLabelLast.Name = "ToolStripStatusLabelLast"
+        Me.ToolStripStatusLabelLast.Size = New System.Drawing.Size(69, 17)
+        Me.ToolStripStatusLabelLast.Text = "Last Update"
+        '
+        'ToolStripStatusStale
+        '
+        Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
+        Me.ToolStripStatusStale.Size = New System.Drawing.Size(35, 17)
+        Me.ToolStripStatusStale.Text = "Stale "
+        '
+        'OpenDebugToolStripMenuItem
+        '
+        Me.OpenDebugToolStripMenuItem.Name = "OpenDebugToolStripMenuItem"
+        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenDebugToolStripMenuItem.Text = "&New Table"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddInputToolStripMenuItem})
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        '
+        'AddInputToolStripMenuItem
+        '
+        Me.AddInputToolStripMenuItem.Name = "AddInputToolStripMenuItem"
+        Me.AddInputToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddInputToolStripMenuItem.Text = "Add Input"
         '
         'DriversStation
         '
@@ -80,7 +124,7 @@ Partial Class DriversStation
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "DriversStation"
-        Me.Text = "DriversStation"
+        Me.Text = "4030 Drivers Station"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.MainPanel.ResumeLayout(False)
@@ -95,5 +139,11 @@ Partial Class DriversStation
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MainPanel As System.Windows.Forms.Panel
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
-    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatus As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabelInterval As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabelLast As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusStale As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents OpenDebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AddInputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
