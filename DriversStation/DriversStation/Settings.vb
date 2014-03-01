@@ -7,13 +7,17 @@ Module Settings
 
 
     'load or save the robot inputs from/to settings
-    Public Sub LoadOrSaveTable(Load As Boolean)
+    Public Sub SendOrSaveTable(Send As Boolean)
         Dim Temp As New ListDictionary
-        If Load = True Then
+        If Send = True Then
             Temp = My.Settings.RobotInputTable
-            For Each key In Temp.Keys
-                DriversStation.RobotInputs.setValue(key.ToString, Temp.Item(key.ToString).ToString)
-            Next
+            Try
+                For Each key In Temp.Keys
+                    DriversStation.RobotInputs.setValue(key.ToString, Temp.Item(key.ToString).ToString)
+                Next
+            Catch ex As NullReferenceException
+
+            End Try
             DriversStation.RobotInputs.send()
         Else
             'save the values
@@ -29,25 +33,9 @@ Module Settings
         End If
     End Sub
 
-    Public Sub SaveOutputTableNames()
-        Dim TableNames As New ListDictionary
-        For Each key In DriversStation.OutputTables.Keys
-            If TableNames.Contains(key) = False Then
-                TableNames.Add(key, DriversStation.OutputTables.getValue(key))
-            Else
-                TableNames.Item(key) = DriversStation.OutputTables.getValue(key)
-            End If
-        Next
-        My.Settings.OutputTablesList = TableNames
-        My.Settings.Save()
-    End Sub
-
-    Public Sub LoadOutputTables()
-        Dim TablesNames As New ListDictionary
-        DriversStation.OpenTables = New NewTable
-
-        TablesNames = My.Settings.OutputTablesList
-        For Each table In TablesNames.Keys
+    Public Sub SubscribeOutputTables()
+        For Each table In DriversStation.OutputTables.Keys
+            DriversStation.OpenTables = New NewTable
             DriversStation.OpenTables.TableNameTxt.Text = table
             DriversStation.OpenTables.Subscribed()
         Next
@@ -57,17 +45,12 @@ Module Settings
 #Region "User Stuff"
 
     'saves all user subscribed tables names to the settings
-    Public Sub SaveUserTableNames()
-        Dim TablesNames As New StringCollection
-        For Each table In DriversStation.SubscribedTables
-            TablesNames.Add(table.name)
-        Next
-        My.Settings.SubTables = TablesNames
-
-        For Each table In DriversStation.PublishedTables
-            TablesNames.Add(table.name)
-        Next
-        My.Settings.PubTables = TablesNames
+    Public Sub UserVisibleStatus(table As DotNetTable)
+        If table.iswritable Then
+            My.Settings.PubTables.Add(table.name)
+        Else
+            My.Settings.SubTables.Add(table.name)
+        End If
         My.Settings.Save()
     End Sub
 
@@ -75,18 +58,25 @@ Module Settings
     Public Sub LoadUserTables()
             Dim TablesNames As New StringCollection
             DriversStation.OpenTables = New NewTable
-
+        Try
             TablesNames = My.Settings.SubTables
             For Each table In TablesNames
                 DriversStation.OpenTables.TableNameTxt.Text = table
                 DriversStation.OpenTables.Subscribed()
             Next
+        Catch ex As NullReferenceException
 
+        End Try
+
+        Try
             TablesNames = My.Settings.PubTables
             For Each table In TablesNames
                 DriversStation.OpenTables.TableNameTxt.Text = table
                 DriversStation.OpenTables.Publish()
             Next
+        Catch ex As NullReferenceException
+
+        End Try
     End Sub
 
 #End Region

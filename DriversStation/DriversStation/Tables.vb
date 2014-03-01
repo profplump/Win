@@ -29,14 +29,18 @@ Public Class Tables
     End Sub
 
     Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If My.Settings.OutputTablesList.Contains(Table.name) Then
-            DisplayName = My.Settings.OutputTablesList.Item(Table.name)
+        If DriversStation.OutputTables.exists(Table.name) Then
+            DisplayName = DriversStation.OutputTables.getValue(Table.name)
         Else
             DisplayName = Table.name
         End If
 
         If Table.iswritable = True Then
             Me.Text = "Published " & DisplayName
+            'add to settings 
+            If My.Settings.PubTables.Contains(Table.name) = False Then
+                My.Settings.PubTables.Add(Table.name)
+            End If
             'show published controls 'hiding for now
             Label1.Visible = False
             IntervalBtn.Visible = False
@@ -58,6 +62,10 @@ Public Class Tables
             TableDGV.ReadOnly = False
         Else
             Me.Text = "Subscribed to " & DisplayName
+            'add to settings
+            If My.Settings.SubTables.Contains(Table.name) = False Then
+                My.Settings.SubTables.Add(Table.name)
+            End If
             'hide published controls
             Label1.Visible = False
             IntervalBtn.Visible = False
@@ -65,6 +73,9 @@ Public Class Tables
             'disable editing
             TableDGV.ReadOnly = True
         End If
+
+        'update settings
+
     End Sub
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
@@ -86,6 +97,7 @@ Public Class Tables
         TableDGV.DataSource = MyArray
         UpdateLabels()
     End Sub
+
 
     Private Sub UpdateLabels()
         Dim StartDate As New DateTime(1970, 1, 1)
@@ -152,10 +164,6 @@ Public Class Tables
         Next
     End Sub
 
-    Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        DotNetTables.DotNetTables.drop(Table.name())
-    End Sub
-
     Private Sub IntervalBtn_Click(sender As Object, e As EventArgs) Handles IntervalBtn.Click
         Dim UpdateInterval As String
         UpdateInterval = IntervalTxt.Text
@@ -172,4 +180,10 @@ Public Class Tables
         End If
         DriversStation.OpenTables.Show()
     End Sub
+
+    Private Sub Tables_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        'update settings
+
+    End Sub
+
 End Class

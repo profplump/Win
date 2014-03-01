@@ -61,7 +61,8 @@ Partial Class Driving
         'TableDGV
         '
         Me.TableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.TableDGV.Location = New System.Drawing.Point(21, 212)
+        Me.TableDGV.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.TableDGV.Location = New System.Drawing.Point(19, 176)
         Me.TableDGV.Name = "TableDGV"
         Me.TableDGV.Size = New System.Drawing.Size(592, 150)
         Me.TableDGV.TabIndex = 3
@@ -70,12 +71,12 @@ Partial Class Driving
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteRowToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(134, 26)
         '
         'DeleteRowToolStripMenuItem
         '
         Me.DeleteRowToolStripMenuItem.Name = "DeleteRowToolStripMenuItem"
-        Me.DeleteRowToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteRowToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.DeleteRowToolStripMenuItem.Text = "Delete Row"
         '
         'Driving
@@ -87,7 +88,7 @@ Partial Class Driving
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Driving"
-        Me.Size = New System.Drawing.Size(635, 382)
+        Me.Size = New System.Drawing.Size(635, 346)
         CType(Me.TableDGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)

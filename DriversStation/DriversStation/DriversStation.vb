@@ -2,20 +2,16 @@
 Imports DotNetTables.DotNetTable
 Imports DotNetTables.DotNetTables
 Imports System.IO
-Imports System.Collections.Specialized
 
 
 Public Class DriversStation
     Public OpenTables As NewTable
+    Public MainControl As New Driving
 
     'pre-determined tables
     Public OutputTables As DotNetTable
     Public RobotInputDefaults As DotNetTable
     Public RobotInputs As DotNetTable
-
-    'user added tables
-    Public PublishedTables() As DotNetTable
-    Public SubscribedTables() As DotNetTable
 
     Private Sub DriversStation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ModeSelect As New OpenControl
@@ -42,8 +38,7 @@ Public Class DriversStation
 
         'subscribe and publish to defaults
         GetTables()
-
-        Dim MainControl As New Driving
+        'display main output control
         Me.FillPanel(MainControl, "Drivers Station in" & Mode)
     End Sub
 
@@ -51,24 +46,19 @@ Public Class DriversStation
         'publish tables to robot
         RobotInputs = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
         'load existing table if any
-        LoadOrSaveTable(True)
-        RobotInputs.onChange(Me)
+        SendOrSaveTable(True)
+        RobotInputs.onChange(MainControl)
 
         'Subscribe to robot tables
         'debug tables
         OutputTables = DotNetTables.DotNetTables.subscribe(My.Settings.OutputTables)
-        OutputTables.onChange(Me)
-        OutputTables.onStale(Me)
-        SaveOutputTableNames()
+        OutputTables.onChange(MainControl)
+        OutputTables.onStale(MainControl)
 
         'input defaults
         RobotInputDefaults = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)
-        RobotInputDefaults.onChange(Me)
-        RobotInputDefaults.onStale(Me)
-
-        'publish/subscribe all debug tables and last user session
-        LoadUserTables()
-        LoadOutputTables()
+        RobotInputDefaults.onChange(MainControl)
+        RobotInputDefaults.onStale(MainControl)
     End Sub
 
     Private Sub OpenDebugToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDebugToolStripMenuItem.Click
@@ -77,4 +67,9 @@ Public Class DriversStation
         End If
         OpenTables.Show()
     End Sub
+
+    Private Sub DriversStation_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        End
+    End Sub
+
 End Class

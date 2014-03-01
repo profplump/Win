@@ -100,64 +100,53 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("""output-tables""")> _
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("""output-tables""")>  _
         Public ReadOnly Property OutputTables() As String
             Get
-                Return CType(Me("OutputTables"), String)
+                Return CType(Me("OutputTables"),String)
             End Get
         End Property
-
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input-default""")> _
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input-default""")>  _
         Public ReadOnly Property RobotInputDefault() As String
             Get
-                Return CType(Me("RobotInputDefault"), String)
+                Return CType(Me("RobotInputDefault"),String)
             End Get
         End Property
-
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input""")> _
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input""")>  _
         Public ReadOnly Property RobotInput() As String
             Get
-                Return CType(Me("RobotInput"), String)
+                Return CType(Me("RobotInput"),String)
             End Get
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property RobotInputTable() As Global.System.Collections.Specialized.ListDictionary
             Get
-                Return CType(Me("RobotInputTable"), Global.System.Collections.Specialized.ListDictionary)
+                Return CType(Me("RobotInputTable"),Global.System.Collections.Specialized.ListDictionary)
             End Get
-            Set(value As Global.System.Collections.Specialized.ListDictionary)
+            Set
                 Me("RobotInputTable") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")> _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property DebugMode() As Boolean
             Get
-                Return CType(Me("DebugMode"), Boolean)
+                Return CType(Me("DebugMode"),Boolean)
             End Get
-            Set(value As Boolean)
+            Set
                 Me("DebugMode") = value
-            End Set
-        End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
-        Public Property OutputTablesList() As Global.System.Collections.Specialized.ListDictionary
-            Get
-                Return CType(Me("OutputTablesList"), Global.System.Collections.Specialized.ListDictionary)
-            End Get
-            Set(value As Global.System.Collections.Specialized.ListDictionary)
-                Me("OutputTablesList") = value
             End Set
         End Property
     End Class

@@ -27,14 +27,16 @@ Partial Class DriversStation
         Me.OpenDebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddInputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowAllToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.MainPanel = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.ToolStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.TablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ShowAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.MainPanel.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -59,7 +61,7 @@ Partial Class DriversStation
         'OpenDebugToolStripMenuItem
         '
         Me.OpenDebugToolStripMenuItem.Name = "OpenDebugToolStripMenuItem"
-        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.OpenDebugToolStripMenuItem.Text = "&New Table"
         '
         'EditToolStripMenuItem
@@ -72,8 +74,32 @@ Partial Class DriversStation
         'AddInputToolStripMenuItem
         '
         Me.AddInputToolStripMenuItem.Name = "AddInputToolStripMenuItem"
-        Me.AddInputToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddInputToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
         Me.AddInputToolStripMenuItem.Text = "Add Input"
+        '
+        'TablesToolStripMenuItem
+        '
+        Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowAllToolStripMenuItem1, Me.ToolStripSeparator1, Me.ToolStripTextBox1})
+        Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
+        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
+        Me.TablesToolStripMenuItem.Text = "Tables"
+        '
+        'ShowAllToolStripMenuItem1
+        '
+        Me.ShowAllToolStripMenuItem1.Name = "ShowAllToolStripMenuItem1"
+        Me.ShowAllToolStripMenuItem1.Size = New System.Drawing.Size(160, 22)
+        Me.ShowAllToolStripMenuItem1.Text = "Show All"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(157, 6)
+        '
+        'ToolStripTextBox1
+        '
+        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
+        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 23)
+        Me.ToolStripTextBox1.Text = "Subscribed"
         '
         'MainPanel
         '
@@ -81,13 +107,13 @@ Partial Class DriversStation
         Me.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MainPanel.Location = New System.Drawing.Point(0, 24)
         Me.MainPanel.Name = "MainPanel"
-        Me.MainPanel.Size = New System.Drawing.Size(642, 331)
+        Me.MainPanel.Size = New System.Drawing.Size(642, 366)
         Me.MainPanel.TabIndex = 1
         '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatus, Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval, Me.ToolStripStatusStale})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 309)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 344)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(642, 22)
         Me.StatusStrip1.TabIndex = 0
@@ -117,25 +143,12 @@ Partial Class DriversStation
         Me.ToolStripStatusStale.Size = New System.Drawing.Size(35, 17)
         Me.ToolStripStatusStale.Text = "Stale "
         '
-        'TablesToolStripMenuItem
-        '
-        Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowAllToolStripMenuItem})
-        Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
-        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
-        Me.TablesToolStripMenuItem.Text = "Tables"
-        '
-        'ShowAllToolStripMenuItem
-        '
-        Me.ShowAllToolStripMenuItem.Name = "ShowAllToolStripMenuItem"
-        Me.ShowAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ShowAllToolStripMenuItem.Text = "Show"
-        '
         'DriversStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(642, 355)
+        Me.ClientSize = New System.Drawing.Size(642, 390)
         Me.Controls.Add(Me.MainPanel)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -163,5 +176,7 @@ Partial Class DriversStation
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddInputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ShowAllToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ShowAllToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
 End Class

@@ -29,8 +29,5 @@
     <Setting Name="DebugMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="OutputTablesList" Type="System.Collections.Specialized.ListDictionary" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
   </Settings>
 </SettingsFile>

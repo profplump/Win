@@ -7,39 +7,33 @@ Imports System.Threading
 Public Class Driving
     Implements DotNetTableEvents
 
-    Public SubTable As DotNetTable
     Public Table As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
 #Region "Load"
 
     Private Sub Driving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If Table.iswritable = True Then
-            Me.Text = "Published " & Table.name
-            'show published controls 'hiding for now
-            Label1.Visible = False
+        Table = DriversStation.RobotInputs
 
-            'add column headers
-            Dim Key As New DataGridViewTextBoxColumn
-            Key.Name = "Key"
-            Key.HeaderText = "Key"
-            Key.DataPropertyName = "Key"
-            Dim Value As New DataGridViewTextBoxColumn
-            Value.Name = "Value"
-            Value.HeaderText = "Value"
-            Value.DataPropertyName = "Value"
-            TableDGV.Columns.Add(Key)
-            TableDGV.Columns.Add(Value)
+        'add column headers
+        Dim Key As New DataGridViewTextBoxColumn
+        Key.Name = "Key"
+        Key.HeaderText = "Key"
+        Key.DataPropertyName = "Key"
+        Dim Value As New DataGridViewTextBoxColumn
+        Value.Name = "Value"
+        Value.HeaderText = "Value"
+        Value.DataPropertyName = "Value"
+        TableDGV.Columns.Add(Key)
+        TableDGV.Columns.Add(Value)
 
-            'enable editing
-            TableDGV.ReadOnly = False
-        Else
-            Me.Text = "Subscribed to " & Table.name
-            'hide published controls
-            Label1.Visible = False
-            'disable editing
-            TableDGV.ReadOnly = True
-        End If
+        'display data
+        Dim MyTable As DataTable
+        MyTable =
+        TableDGV.DataSource = MyTable
+
+        'enable editing
+        TableDGV.ReadOnly = False
     End Sub
 
 
@@ -52,7 +46,7 @@ Public Class Driving
             Logs(EventTable)
             Me.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
-            UpdateForm()
+            UpdateDispatch(EventTable)
         End If
     End Sub
 
@@ -60,19 +54,22 @@ Public Class Driving
         DriversStation.ToolStripStatusStale.Text = "Table is stale."
     End Sub
 
-    Private Sub LoadVariableNames()
-        Table = DotNetTables.DotNetTables.findTable()
-        For Each key In SubTable.Keys
-            Table.setValue(key, "")
-        Next
-        SendData(Table)
-    End Sub
+    Private Sub UpdateDispatch(EventTable As DotNetTable)
 
-    Private Sub UpdateForm()
-        'todo: update form based on table
-        Dim MyArray As Array
-        MyArray = Table._data.ToArray
-        TableDGV.DataSource = MyArray
+        Select Case EventTable.name
+            Case My.Settings.RobotInputDefault
+                UpdateInputKeys()
+            Case My.Settings.RobotInput
+                UpdateInputValues()
+            Case My.Settings.OutputTables
+
+            Case Else
+                'main dispatch
+        End Select
+   
+        'Dim MyArray As Array
+        'MyArray = Table._data.ToArray
+        'TableDGV.DataSource = MyArray
         UpdateLabels()
     End Sub
 
@@ -81,6 +78,26 @@ Public Class Driving
         DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
         DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate)
         DriversStation.ToolStripStatusStale.Text = ""
+    End Sub
+
+    'on change for RobotInputsDefaults
+    Public Sub UpdateInputKeys()
+        For Each key In DriversStation.RobotInputDefaults.Keys
+            If Table.exists(key) Then
+                Table.setValue(key, Table.getValue(key))
+            Else
+                Table.setValue(key, "")
+                'add to datagrideview
+
+            End If
+        Next
+        SendData(Table)
+        SendOrSaveTable(False)
+    End Sub
+
+    'on change for RobotInputs
+    Public Sub UpdateInputValues()
+        SendOrSaveTable(False)
     End Sub
 
     Private Sub Logs(TableData As DotNetTable)
@@ -143,6 +160,9 @@ Public Class Driving
             End Try
         Next
     End Sub
+
+
+
 
     'Private Sub IntervalBtn_Click(sender As Object, e As EventArgs) Handles IntervalBtn.Click
     '    Dim UpdateInterval As String
