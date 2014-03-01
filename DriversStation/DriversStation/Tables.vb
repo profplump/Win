@@ -9,6 +9,7 @@ Public Class Tables
 
     Public Table As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
+    Dim DisplayName As String
 
     Public Sub New(TableName As String, IsPublished As Boolean)
         ' This call is required by the designer.
@@ -28,8 +29,14 @@ Public Class Tables
     End Sub
 
     Private Sub Subscribed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.OutputTablesList.Contains(Table.name) Then
+            DisplayName = My.Settings.OutputTablesList.Item(Table.name)
+        Else
+            DisplayName = Table.name
+        End If
+
         If Table.iswritable = True Then
-            Me.Text = "Published " & Table.name
+            Me.Text = "Published " & DisplayName
             'show published controls 'hiding for now
             Label1.Visible = False
             IntervalBtn.Visible = False
@@ -37,9 +44,9 @@ Public Class Tables
 
             'add column headers
             Dim Key As New DataGridViewTextBoxColumn
-            key.Name = "Key"
-            key.HeaderText = "Key"
-            key.DataPropertyName = "Key"
+            Key.Name = "Key"
+            Key.HeaderText = "Key"
+            Key.DataPropertyName = "Key"
             Dim Value As New DataGridViewTextBoxColumn
             Value.Name = "Value"
             Value.HeaderText = "Value"
@@ -50,7 +57,7 @@ Public Class Tables
             'enable editing
             TableDGV.ReadOnly = False
         Else
-            Me.Text = "Subscribed to " & Table.name
+            Me.Text = "Subscribed to " & DisplayName
             'hide published controls
             Label1.Visible = False
             IntervalBtn.Visible = False
@@ -92,7 +99,7 @@ Public Class Tables
         For Each item As String In TableData.Keys
             OutputString = OutputString & item & "|" & TableData.getValue(item) & Environment.NewLine
         Next
-        Dim FileName As String = Application.StartupPath & "\" & Table.name & ".txt"
+        Dim FileName As String = Application.StartupPath & "\" & DisplayName & ".txt"
         File.AppendAllText(FileName, Environment.NewLine & Now & Environment.NewLine)
         File.AppendAllText(FileName, OutputString)
     End Sub

@@ -100,26 +100,64 @@ Namespace My
             End Set
         End Property
         
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("""output-tables""")> _
+        Public ReadOnly Property OutputTables() As String
+            Get
+                Return CType(Me("OutputTables"), String)
+            End Get
+        End Property
+
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input-default""")> _
+        Public ReadOnly Property RobotInputDefault() As String
+            Get
+                Return CType(Me("RobotInputDefault"), String)
+            End Get
+        End Property
+
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input""")> _
+        Public ReadOnly Property RobotInput() As String
+            Get
+                Return CType(Me("RobotInput"), String)
+            End Get
+        End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
+        Public Property RobotInputTable() As Global.System.Collections.Specialized.ListDictionary
+            Get
+                Return CType(Me("RobotInputTable"), Global.System.Collections.Specialized.ListDictionary)
+            End Get
+            Set(value As Global.System.Collections.Specialized.ListDictionary)
+                Me("RobotInputTable") = value
+            End Set
+        End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute(), _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("""RobotTable""")> _
-        Public Property ParametersName() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("False")> _
+        Public Property DebugMode() As Boolean
             Get
-                Return CType(Me("ParametersName"), String)
+                Return CType(Me("DebugMode"), Boolean)
             End Get
-            Set(value As String)
-                Me("ParametersName") = value
+            Set(value As Boolean)
+                Me("DebugMode") = value
             End Set
         End Property
 
         <Global.System.Configuration.UserScopedSettingAttribute(), _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
-        Public Property ParametersTable() As Global.DotNetTables.DotNetTables
+        Public Property OutputTablesList() As Global.System.Collections.Specialized.ListDictionary
             Get
-                Return CType(Me("ParametersTable"), Global.DotNetTables.DotNetTables)
+                Return CType(Me("OutputTablesList"), Global.System.Collections.Specialized.ListDictionary)
             End Get
-            Set(value As Global.DotNetTables.DotNetTables)
-                Me("ParametersTable") = value
+            Set(value As Global.System.Collections.Specialized.ListDictionary)
+                Me("OutputTablesList") = value
             End Set
         End Property
     End Class

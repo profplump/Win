@@ -66,6 +66,7 @@
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
+    <Import Include="System.Collections.Concurrent" />
     <Import Include="System.Collections.Generic" />
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
@@ -100,6 +101,7 @@
     <Compile Include="OpenControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="Tables.vb">
       <SubType>Form</SubType>
     </Compile>

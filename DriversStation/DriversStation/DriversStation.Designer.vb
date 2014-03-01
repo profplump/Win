@@ -24,15 +24,17 @@ Partial Class DriversStation
     Private Sub InitializeComponent()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MainPanel = New System.Windows.Forms.Panel()
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
         Me.OpenDebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AddInputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainPanel = New System.Windows.Forms.Panel()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.TablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowAllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.MainPanel.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
@@ -40,7 +42,7 @@ Partial Class DriversStation
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.TablesToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(642, 24)
@@ -53,6 +55,25 @@ Partial Class DriversStation
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
+        '
+        'OpenDebugToolStripMenuItem
+        '
+        Me.OpenDebugToolStripMenuItem.Name = "OpenDebugToolStripMenuItem"
+        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenDebugToolStripMenuItem.Text = "&New Table"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddInputToolStripMenuItem})
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
+        Me.EditToolStripMenuItem.Text = "Edit"
+        '
+        'AddInputToolStripMenuItem
+        '
+        Me.AddInputToolStripMenuItem.Name = "AddInputToolStripMenuItem"
+        Me.AddInputToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AddInputToolStripMenuItem.Text = "Add Input"
         '
         'MainPanel
         '
@@ -78,17 +99,17 @@ Partial Class DriversStation
         Me.ToolStripStatus.Size = New System.Drawing.Size(121, 17)
         Me.ToolStripStatus.Text = "ToolStripStatusLabel1"
         '
-        'ToolStripStatusLabelInterval
-        '
-        Me.ToolStripStatusLabelInterval.Name = "ToolStripStatusLabelInterval"
-        Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(87, 17)
-        Me.ToolStripStatusLabelInterval.Text = "Update Interval"
-        '
         'ToolStripStatusLabelLast
         '
         Me.ToolStripStatusLabelLast.Name = "ToolStripStatusLabelLast"
         Me.ToolStripStatusLabelLast.Size = New System.Drawing.Size(69, 17)
         Me.ToolStripStatusLabelLast.Text = "Last Update"
+        '
+        'ToolStripStatusLabelInterval
+        '
+        Me.ToolStripStatusLabelInterval.Name = "ToolStripStatusLabelInterval"
+        Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(87, 17)
+        Me.ToolStripStatusLabelInterval.Text = "Update Interval"
         '
         'ToolStripStatusStale
         '
@@ -96,29 +117,24 @@ Partial Class DriversStation
         Me.ToolStripStatusStale.Size = New System.Drawing.Size(35, 17)
         Me.ToolStripStatusStale.Text = "Stale "
         '
-        'OpenDebugToolStripMenuItem
+        'TablesToolStripMenuItem
         '
-        Me.OpenDebugToolStripMenuItem.Name = "OpenDebugToolStripMenuItem"
-        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OpenDebugToolStripMenuItem.Text = "&New Table"
+        Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowAllToolStripMenuItem})
+        Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
+        Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
+        Me.TablesToolStripMenuItem.Text = "Tables"
         '
-        'EditToolStripMenuItem
+        'ShowAllToolStripMenuItem
         '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddInputToolStripMenuItem})
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
-        Me.EditToolStripMenuItem.Text = "Edit"
-        '
-        'AddInputToolStripMenuItem
-        '
-        Me.AddInputToolStripMenuItem.Name = "AddInputToolStripMenuItem"
-        Me.AddInputToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.AddInputToolStripMenuItem.Text = "Add Input"
+        Me.ShowAllToolStripMenuItem.Name = "ShowAllToolStripMenuItem"
+        Me.ShowAllToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ShowAllToolStripMenuItem.Text = "Show"
         '
         'DriversStation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(642, 355)
         Me.Controls.Add(Me.MainPanel)
         Me.Controls.Add(Me.MenuStrip1)
@@ -146,4 +162,6 @@ Partial Class DriversStation
     Friend WithEvents OpenDebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddInputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ShowAllToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

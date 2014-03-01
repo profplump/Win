@@ -18,8 +18,6 @@ Public Class Driving
             Me.Text = "Published " & Table.name
             'show published controls 'hiding for now
             Label1.Visible = False
-            IntervalBtn.Visible = False
-            IntervalTxt.Visible = False
 
             'add column headers
             Dim Key As New DataGridViewTextBoxColumn
@@ -39,17 +37,12 @@ Public Class Driving
             Me.Text = "Subscribed to " & Table.name
             'hide published controls
             Label1.Visible = False
-            IntervalBtn.Visible = False
-            IntervalTxt.Visible = False
             'disable editing
             TableDGV.ReadOnly = True
         End If
     End Sub
 
 
-    Private Sub Subscribed_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        DotNetTables.DotNetTables.drop(Table.name())
-    End Sub
 #End Region
 
 
@@ -65,6 +58,14 @@ Public Class Driving
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
         DriversStation.ToolStripStatusStale.Text = "Table is stale."
+    End Sub
+
+    Private Sub LoadVariableNames()
+        Table = DotNetTables.DotNetTables.findTable()
+        For Each key In SubTable.Keys
+            Table.setValue(key, "")
+        Next
+        SendData(Table)
     End Sub
 
     Private Sub UpdateForm()
@@ -143,16 +144,17 @@ Public Class Driving
         Next
     End Sub
 
-    Private Sub IntervalBtn_Click(sender As Object, e As EventArgs) Handles IntervalBtn.Click
-        Dim UpdateInterval As String
-        UpdateInterval = IntervalTxt.Text
-        If IsNumeric(UpdateInterval) Then
-            Table.setInterval(UpdateInterval)
-        Else
-            MsgBox("Update Interval must be numeric.", MsgBoxStyle.Exclamation, "Invalid Input")
-        End If
-    End Sub
+    'Private Sub IntervalBtn_Click(sender As Object, e As EventArgs) Handles IntervalBtn.Click
+    '    Dim UpdateInterval As String
+    '    UpdateInterval = IntervalTxt.Text
+    '    If IsNumeric(UpdateInterval) Then
+    '        Table.setInterval(UpdateInterval)
+    '    Else
+    '        MsgBox("Update Interval must be numeric.", MsgBoxStyle.Exclamation, "Invalid Input")
+    '    End If
+    'End Sub
 #End Region
+
 
 
 End Class
