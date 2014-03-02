@@ -32,15 +32,18 @@ Public Class ParameterTable
 
     'on change for RobotInputsDefaults
     Public Sub UpdateInputKeys()
-        Dim spareKeys As List(Of String)
-        spareKeys = Me.table.Keys
+        Dim RID As DotNetTable = findTable(My.Settings.RobotInputDefault)
+        Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
 
-        For Each key In DriversStation.RobotInputDefaults.Keys
+        Dim spareKeys As List(Of String)
+        spareKeys = RID.Keys
+
+        For Each key In RID.Keys
             'set new value or add new key
-            If table.exists(key) Then
-                table.setValue(key, table.getValue(key))
+            If RI.exists(key) Then
+                RI.setValue(key, RI.getValue(key))
             Else
-                table.setValue(key, "")
+                RI.setValue(key, "")
             End If
             'delete row from temp table
             spareKeys.Remove(key)
@@ -48,12 +51,12 @@ Public Class ParameterTable
 
         'delete remaining temp rows from parameter table. they weren't in new list of default keys
         For Each key In spareKeys
-            table.remove(key)
+            RI.remove(key)
         Next
 
         SendOrSaveTable(False)
         SendOrSaveTable(True)
-        ThreadPool.QueueUserWorkItem(AddressOf SendData, table)
+        ThreadPool.QueueUserWorkItem(AddressOf SendData, RI)
     End Sub
 
     'on change for RobotInputs
@@ -75,27 +78,27 @@ Public Class ParameterTable
 
     'load or save the robot inputs from/to settings
     Public Sub SendOrSaveTable(Send As Boolean)
+        Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
         Dim Temp As New ListDictionary
         If Send = True Then
             'update the robot-inputs table based on the current values
             Temp = My.Settings.RobotInputTable
-            DriversStation.RobotInputs.clear() 'clear all existing values in table
+            RI.clear() 'clear all existing values in table
             Try
                 're-add based on saved values
                 For Each key In Temp.Keys
-                    DriversStation.RobotInputs.setValue(key.ToString, Temp.Item(key.ToString).ToString)
+                    RI.setValue(key.ToString, Temp.Item(key.ToString).ToString)
                 Next
             Catch ex As NullReferenceException
 
             End Try
-            DriversStation.RobotInputs.send()
         Else
             'save the robot-inputs values to settings
-            For Each key In DriversStation.RobotInputs.Keys
+            For Each key In RI.Keys
                 If Temp.Contains(key) = False Then
-                    Temp.Add(key, DriversStation.RobotInputs.getValue(key))
+                    Temp.Add(key, RI.getValue(key))
                 Else
-                    Temp.Item(key) = DriversStation.RobotInputs.getValue(key)
+                    Temp.Item(key) = RI.getValue(key)
                 End If
             Next
             My.Settings.RobotInputTable = Temp

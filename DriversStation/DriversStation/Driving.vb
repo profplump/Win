@@ -68,7 +68,7 @@ Public Class Driving
         For Each item As String In TableData.Keys
             OutputString = OutputString & item & "|" & TableData.getValue(item) & Environment.NewLine
         Next
-        Dim FileName As String = Application.StartupPath & "\" & Table.name & ".txt"
+        Dim FileName As String = Application.StartupPath & "\" & TableData.name & ".txt"
         File.AppendAllText(FileName, Environment.NewLine & Now & Environment.NewLine)
         File.AppendAllText(FileName, OutputString)
     End Sub
