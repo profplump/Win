@@ -15,32 +15,17 @@ Public Class Driving
     Private Sub Driving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Table = DriversStation.RobotInputs
 
-        'add column headers
-        Dim Key As New DataGridViewTextBoxColumn
-        Key.Name = "Key"
-        Key.HeaderText = "Key"
-        Key.DataPropertyName = "Key"
-        Dim Value As New DataGridViewTextBoxColumn
-        Value.Name = "Value"
-        Value.HeaderText = "Value"
-        Value.DataPropertyName = "Value"
-        TableDGV.Columns.Add(Key)
-        TableDGV.Columns.Add(Value)
-
         'display data
-        Dim MyTable As DataTable
-        MyTable =
-        TableDGV.DataSource = MyTable
-
+        TableDGV.DataSource = Table._data
         'enable editing
         TableDGV.ReadOnly = False
     End Sub
-
 
 #End Region
 
 
 #Region "Subscribed"
+
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         If Me.InvokeRequired Then
             Logs(EventTable)
@@ -58,18 +43,15 @@ Public Class Driving
 
         Select Case EventTable.name
             Case My.Settings.RobotInputDefault
-                UpdateInputKeys()
+                DriversStation.ParameterTable1.UpdateInputKeys()
             Case My.Settings.RobotInput
-                UpdateInputValues()
+                DriversStation.ParameterTable1.UpdateInputValues()
             Case My.Settings.OutputTables
-
+                SubscribeOutputTables()
             Case Else
                 'main dispatch
         End Select
-   
-        'Dim MyArray As Array
-        'MyArray = Table._data.ToArray
-        'TableDGV.DataSource = MyArray
+
         UpdateLabels()
     End Sub
 
@@ -80,27 +62,8 @@ Public Class Driving
         DriversStation.ToolStripStatusStale.Text = ""
     End Sub
 
-    'on change for RobotInputsDefaults
-    Public Sub UpdateInputKeys()
-        For Each key In DriversStation.RobotInputDefaults.Keys
-            If Table.exists(key) Then
-                Table.setValue(key, Table.getValue(key))
-            Else
-                Table.setValue(key, "")
-                'add to datagrideview
 
-            End If
-        Next
-        SendData(Table)
-        SendOrSaveTable(False)
-    End Sub
-
-    'on change for RobotInputs
-    Public Sub UpdateInputValues()
-        SendOrSaveTable(False)
-    End Sub
-
-    Private Sub Logs(TableData As DotNetTable)
+    Public Sub Logs(TableData As DotNetTable)
         Dim OutputString As String = ""
         For Each item As String In TableData.Keys
             OutputString = OutputString & item & "|" & TableData.getValue(item) & Environment.NewLine
@@ -117,14 +80,29 @@ Public Class Driving
         Dim Key As String
         Dim Value As String
 
-        Key = TableDGV.CurrentRow.Cells("Key").Value
-        Value = TableDGV.CurrentRow.Cells("Value").Value
+        If IsDBNull(TableDGV.CurrentRow.Cells("Key").Value) Then
+            Key = ""
+        Else
+            Key = TableDGV.CurrentRow.Cells("Key").Value
+        End If
+        If IsDBNull(TableDGV.CurrentRow.Cells("Value").Value) Then
+            Value = ""
+        Else
+            Value = TableDGV.CurrentRow.Cells("Value").Value
+        End If
+
 
         If Key <> "" Then
             If Table.exists(Key) = True Then
                 For Each row As DataGridViewRow In TableDGV.Rows
                     If row.Index <> TableDGV.CurrentRow.Index Then
-                        If row.Cells("Key").Value = Key Then
+                        Dim CheckRow As String
+                        If IsDBNull(row.Cells("Key").Value) Then
+                            CheckRow = ""
+                        Else
+                            CheckRow = row.Cells("Key").Value
+                        End If
+                        If CheckRow = Key Then
                             MsgBox("This key alredy exists.", MsgBoxStyle.Exclamation, "Duplicate Key")
                             TableDGV.Rows.Remove(TableDGV.CurrentRow)
                             Exit Sub
@@ -159,6 +137,7 @@ Public Class Driving
                 End Try
             End Try
         Next
+        SendData(Table)
     End Sub
 
 

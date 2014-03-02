@@ -62,6 +62,7 @@ Partial Class Driving
         '
         Me.TableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TableDGV.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.TableDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.TableDGV.Location = New System.Drawing.Point(19, 176)
         Me.TableDGV.Name = "TableDGV"
         Me.TableDGV.Size = New System.Drawing.Size(592, 150)

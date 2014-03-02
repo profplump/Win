@@ -102,7 +102,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("""output-tables""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("output-tables")>  _
         Public ReadOnly Property OutputTables() As String
             Get
                 Return CType(Me("OutputTables"),String)
@@ -111,7 +111,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input-default""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("robot-input-default")>  _
         Public ReadOnly Property RobotInputDefault() As String
             Get
                 Return CType(Me("RobotInputDefault"),String)
@@ -120,7 +120,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("""robot-input""")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("robot-input")>  _
         Public ReadOnly Property RobotInput() As String
             Get
                 Return CType(Me("RobotInput"),String)

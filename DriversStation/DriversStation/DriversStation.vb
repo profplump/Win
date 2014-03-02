@@ -7,6 +7,7 @@ Imports System.IO
 Public Class DriversStation
     Public OpenTables As NewTable
     Public MainControl As New Driving
+    Public ParameterTable1 As New ParameterTable
 
     'pre-determined tables
     Public OutputTables As DotNetTable
@@ -46,8 +47,7 @@ Public Class DriversStation
         'publish tables to robot
         RobotInputs = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
         'load existing table if any
-        SendOrSaveTable(True)
-        RobotInputs.onChange(MainControl)
+        ParameterTable1.SendOrSaveTable(True)
 
         'Subscribe to robot tables
         'debug tables
@@ -57,8 +57,8 @@ Public Class DriversStation
 
         'input defaults
         RobotInputDefaults = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)
-        RobotInputDefaults.onChange(MainControl)
-        RobotInputDefaults.onStale(MainControl)
+        RobotInputDefaults.onChange(ParameterTable1)
+        RobotInputDefaults.onStale(ParameterTable1)
     End Sub
 
     Private Sub OpenDebugToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDebugToolStripMenuItem.Click
