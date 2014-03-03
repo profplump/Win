@@ -35,6 +35,24 @@ Public Class OpenControl
         End If
     End Sub
 
+    Public Sub StartButton(ServerMode As Boolean, IP As String)
+        My.Settings.ServerMode = ServerMode
+        My.Settings.IP = IP
+        My.Settings.Save()
+
+        ServerMode = My.Settings.ServerMode
+        If ServerMode = True Then
+            Me.Text = "Server Mode"
+        Else
+            Me.Text = "Client Mode"
+        End If
+
+        If Start() Then
+            DriversStation.main()
+        End If
+
+    End Sub
+
     Public Function Start() As Boolean
         'Start NetworkTables
         Try

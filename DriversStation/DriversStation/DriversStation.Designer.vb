@@ -37,8 +37,8 @@ Partial Class DriversStation
         Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
-        Me.MainPanel.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -103,7 +103,6 @@ Partial Class DriversStation
         '
         'MainPanel
         '
-        Me.MainPanel.Controls.Add(Me.StatusStrip1)
         Me.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MainPanel.Location = New System.Drawing.Point(0, 24)
         Me.MainPanel.Name = "MainPanel"
@@ -112,36 +111,42 @@ Partial Class DriversStation
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatus, Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval, Me.ToolStripStatusStale})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 344)
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabelLast, Me.ToolStripStatusLabelInterval, Me.ToolStripStatusStale, Me.ToolStripStatusLabel1, Me.ToolStripStatus})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 368)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(642, 22)
-        Me.StatusStrip1.TabIndex = 0
+        Me.StatusStrip1.TabIndex = 2
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'ToolStripStatus
         '
         Me.ToolStripStatus.Name = "ToolStripStatus"
-        Me.ToolStripStatus.Size = New System.Drawing.Size(121, 17)
-        Me.ToolStripStatus.Text = "ToolStripStatusLabel1"
+        Me.ToolStripStatus.Size = New System.Drawing.Size(164, 17)
+        Me.ToolStripStatus.Text = "Drivers Station in Client Mode"
         '
         'ToolStripStatusLabelLast
         '
         Me.ToolStripStatusLabelLast.Name = "ToolStripStatusLabelLast"
-        Me.ToolStripStatusLabelLast.Size = New System.Drawing.Size(69, 17)
-        Me.ToolStripStatusLabelLast.Text = "Last Update"
+        Me.ToolStripStatusLabelLast.Size = New System.Drawing.Size(75, 17)
+        Me.ToolStripStatusLabelLast.Text = "Last Update: "
         '
         'ToolStripStatusLabelInterval
         '
         Me.ToolStripStatusLabelInterval.Name = "ToolStripStatusLabelInterval"
-        Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(87, 17)
-        Me.ToolStripStatusLabelInterval.Text = "Update Interval"
+        Me.ToolStripStatusLabelInterval.Size = New System.Drawing.Size(93, 17)
+        Me.ToolStripStatusLabelInterval.Text = "Update Interval: "
         '
         'ToolStripStatusStale
         '
         Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
-        Me.ToolStripStatusStale.Size = New System.Drawing.Size(35, 17)
-        Me.ToolStripStatusStale.Text = "Stale "
+        Me.ToolStripStatusStale.Size = New System.Drawing.Size(46, 17)
+        Me.ToolStripStatusStale.Text = "             "
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(148, 17)
+        Me.ToolStripStatusLabel1.Text = "                                               "
         '
         'DriversStation
         '
@@ -149,6 +154,7 @@ Partial Class DriversStation
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(642, 390)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.MainPanel)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -156,8 +162,6 @@ Partial Class DriversStation
         Me.Text = "4030 Drivers Station"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.MainPanel.ResumeLayout(False)
-        Me.MainPanel.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -167,11 +171,6 @@ Partial Class DriversStation
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MainPanel As System.Windows.Forms.Panel
-    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
-    Friend WithEvents ToolStripStatus As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ToolStripStatusLabelInterval As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ToolStripStatusLabelLast As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ToolStripStatusStale As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents OpenDebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddInputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -179,4 +178,10 @@ Partial Class DriversStation
     Friend WithEvents ShowAllToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripTextBox1 As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
+    Friend WithEvents ToolStripStatus As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabelLast As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabelInterval As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusStale As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel1 As System.Windows.Forms.ToolStripStatusLabel
 End Class

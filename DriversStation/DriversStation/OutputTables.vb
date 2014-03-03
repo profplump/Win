@@ -1,9 +1,37 @@
-﻿Module OutputTables
+﻿Imports System.Collections.Specialized
+Imports DotNetTables
+Imports DotNetTables.DotNetTable
+Imports DotNetTables.DotNetTables
+Imports System.IO
+Imports System.Threading
+
+Public Class OutputTables
+    Implements DotNetTableEvents
+
+    Dim TableControl As NewTable
+    Dim OutputTable As DotNetTable
+
+    Delegate Sub UpdateDelegate(DelTable As DotNetTable)
+
+    Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
+        OutputTable = EventTable
+        If DriversStation.MainControl.InvokeRequired Then
+            DriversStation.MainControl.Logs(EventTable)
+            DriversStation.MainControl.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
+        Else
+            SubscribeOutputTables()
+        End If
+    End Sub
+
     Public Sub SubscribeOutputTables()
-        For Each table In DriversStation.OutputTables.Keys
-            DriversStation.OpenTables = New NewTable
-            DriversStation.OpenTables.TableNameTxt.Text = table
-            DriversStation.OpenTables.Subscribed()
+        For Each table In OutputTable.Keys
+            TableControl = New NewTable
+            TableControl.TableNameTxt.Text = table
+            TableControl.Subscribed()
         Next
     End Sub
-End Module
+
+    Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
+
+    End Sub
+End Class

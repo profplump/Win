@@ -8,6 +8,7 @@ Public Class DriversStation
     Public OpenTables As NewTable
     Public MainControl As New Driving
     Public ParameterTable1 As New ParameterTable
+    Public OutputTables1 As New OutputTables
 
     'pre-determined tables
     Public OutputTables As DotNetTable
@@ -16,7 +17,8 @@ Public Class DriversStation
 
     Private Sub DriversStation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ModeSelect As New OpenControl
-        Me.FillPanel(ModeSelect)
+        My.Settings.IP = "127.0.0.1"
+        ModeSelect.StartButton(False, My.Settings.IP)
     End Sub
 
     Public Sub FillPanel(x As UserControl, Optional UserMsg As String = "Ready")
@@ -27,6 +29,10 @@ Public Class DriversStation
         Me.MainPanel.Controls.Add(x)
         x.Dock = DockStyle.Fill
         Me.ToolStripStatus.Text = UserMsg
+    End Sub
+
+    Public Sub FillMenuList()
+
     End Sub
 
     Public Sub main()
@@ -40,7 +46,7 @@ Public Class DriversStation
         'subscribe and publish to defaults
         GetTables()
         'display main output control
-        Me.FillPanel(MainControl, "Drivers Station in" & Mode)
+        Me.FillPanel(MainControl, "Drivers Station in " & Mode)
     End Sub
 
     Public Sub GetTables()
@@ -52,8 +58,8 @@ Public Class DriversStation
         'Subscribe to robot tables
         'debug tables
         OutputTables = DotNetTables.DotNetTables.subscribe(My.Settings.OutputTables)
-        OutputTables.onChange(MainControl)
-        OutputTables.onStale(MainControl)
+        OutputTables.onChange(OutputTables1)
+        OutputTables.onStale(OutputTables1)
 
         'input defaults
         RobotInputDefaults = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)

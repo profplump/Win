@@ -11,6 +11,7 @@ Public Class ParameterTable
     Dim table As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
+
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         table = EventTable
         If DriversStation.MainControl.InvokeRequired Then
@@ -34,16 +35,16 @@ Public Class ParameterTable
     Public Sub UpdateInputKeys()
         Dim RID As DotNetTable = findTable(My.Settings.RobotInputDefault)
         Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
+        Dim DGVChanged As Boolean = False
 
         Dim spareKeys As List(Of String)
-        spareKeys = RID.Keys
+        spareKeys = RI.Keys
 
         For Each key In RID.Keys
             'set new value or add new key
-            If RI.exists(key) Then
-                RI.setValue(key, RI.getValue(key))
-            Else
-                RI.setValue(key, "")
+            If Not RI.exists(key) Then
+                RI.setValue(key, RID.getValue(key))
+                DGVChanged = True
             End If
             'delete row from temp table
             spareKeys.Remove(key)
@@ -52,11 +53,17 @@ Public Class ParameterTable
         'delete remaining temp rows from parameter table. they weren't in new list of default keys
         For Each key In spareKeys
             RI.remove(key)
+            DGVChanged = True
         Next
 
         SendOrSaveTable(False)
-        SendOrSaveTable(True)
+        'SendOrSaveTable(True)
         ThreadPool.QueueUserWorkItem(AddressOf SendData, RI)
+
+        If DGVChanged Then
+            DriversStation.MainControl.TableDGV.DataSource = RI._data
+            DriversStation.MainControl.Refresh()
+        End If
     End Sub
 
     'on change for RobotInputs
@@ -71,8 +78,8 @@ Public Class ParameterTable
 
     Private Sub UpdateLabels()
         Dim StartDate As New DateTime(1970, 1, 1)
-        DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & table.getInterval
-        DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(table.lastUpdate)
+        DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & table.getInterval & " |"
+        DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(table.lastUpdate) & " |"
         DriversStation.ToolStripStatusStale.Text = ""
     End Sub
 

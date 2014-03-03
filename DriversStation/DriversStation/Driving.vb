@@ -19,6 +19,8 @@ Public Class Driving
         TableDGV.DataSource = Table._data
         'enable editing
         TableDGV.ReadOnly = False
+        TableDGV.Columns(KEY_COLUMN).ReadOnly = True
+        TableDGV.AllowUserToAddRows = False
     End Sub
 
 #End Region
@@ -41,24 +43,15 @@ Public Class Driving
 
     Private Sub UpdateDispatch(EventTable As DotNetTable)
 
-        Select Case EventTable.name
-            Case My.Settings.RobotInputDefault
-                DriversStation.ParameterTable1.UpdateInputKeys()
-            Case My.Settings.RobotInput
-                DriversStation.ParameterTable1.UpdateInputValues()
-            Case My.Settings.OutputTables
-                SubscribeOutputTables()
-            Case Else
-                'main dispatch
-        End Select
+
 
         UpdateLabels()
     End Sub
 
     Private Sub UpdateLabels()
         Dim StartDate As New DateTime(1970, 1, 1)
-        DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval
-        DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate)
+        DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & Table.getInterval & " |"
+        DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(Table.lastUpdate) & " |"
         DriversStation.ToolStripStatusStale.Text = ""
     End Sub
 
@@ -76,45 +69,31 @@ Public Class Driving
 
 
 #Region "Published"
+
     Private Sub TableDGV_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles TableDGV.CellEndEdit
-        Dim Key As String
-        Dim Value As String
+        Dim Key As String = Nothing
+        Dim Value As String = Nothing
 
-        If IsDBNull(TableDGV.CurrentRow.Cells("Key").Value) Then
-            Key = ""
-        Else
-            Key = TableDGV.CurrentRow.Cells("Key").Value
-        End If
-        If IsDBNull(TableDGV.CurrentRow.Cells("Value").Value) Then
-            Value = ""
-        Else
-            Value = TableDGV.CurrentRow.Cells("Value").Value
+        If TableDGV.CurrentRow Is Nothing Then
+            Exit Sub
         End If
 
-
-        If Key <> "" Then
-            If Table.exists(Key) = True Then
-                For Each row As DataGridViewRow In TableDGV.Rows
-                    If row.Index <> TableDGV.CurrentRow.Index Then
-                        Dim CheckRow As String
-                        If IsDBNull(row.Cells("Key").Value) Then
-                            CheckRow = ""
-                        Else
-                            CheckRow = row.Cells("Key").Value
-                        End If
-                        If CheckRow = Key Then
-                            MsgBox("This key alredy exists.", MsgBoxStyle.Exclamation, "Duplicate Key")
-                            TableDGV.Rows.Remove(TableDGV.CurrentRow)
-                            Exit Sub
-                        End If
-                    End If
-                Next
-            End If
-
-            Table.setValue(Key, Value)
-            SendData(Table)
+        If Not IsDBNull(TableDGV.CurrentRow.Cells(KEY_COLUMN).Value) Then
+            Key = TableDGV.CurrentRow.Cells(KEY_COLUMN).Value
         End If
+        If Not IsDBNull(TableDGV.CurrentRow.Cells(VALUE_COLUMN).Value) Then
+            Value = TableDGV.CurrentRow.Cells(VALUE_COLUMN).Value
+        End If
+
+        If Key Is Nothing Or Value Is Nothing Then
+            Exit Sub
+        End If
+
+        Table.setValue(Key, Value)
+        SendData(Table)
+
     End Sub
+
 
     Private Sub SendData(SendTable As DotNetTable)
         SendTable.send()
@@ -153,6 +132,9 @@ Public Class Driving
     '    End If
     'End Sub
 #End Region
+
+
+
 
 
 
