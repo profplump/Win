@@ -102,7 +102,6 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="OutputTables.vb" />
-    <Compile Include="ParameterTable.vb" />
     <Compile Include="Tables.vb">
       <SubType>Form</SubType>
     </Compile>
