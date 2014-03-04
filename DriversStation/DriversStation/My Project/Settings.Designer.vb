@@ -78,13 +78,13 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property VisibleTables() As Global.System.Collections.Specialized.ListDictionary
             Get
-                Return CType(Me("VisibleTables"), Global.System.Collections.Specialized.ListDictionary)
+                Return CType(Me("VisibleTables"),Global.System.Collections.Specialized.ListDictionary)
             End Get
-            Set(value As Global.System.Collections.Specialized.ListDictionary)
+            Set
                 Me("VisibleTables") = value
             End Set
         End Property
@@ -114,17 +114,6 @@ Namespace My
             Get
                 Return CType(Me("RobotInput"),String)
             End Get
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property RobotInputTable() As Global.System.Collections.Specialized.ListDictionary
-            Get
-                Return CType(Me("RobotInputTable"),Global.System.Collections.Specialized.ListDictionary)
-            End Get
-            Set
-                Me("RobotInputTable") = value
-            End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _

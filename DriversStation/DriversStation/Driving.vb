@@ -14,10 +14,9 @@ Public Class Driving
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
 #Region "Load"
-
     Private Sub Driving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim RID As DotNetTable = findTable(My.Settings.RobotInputDefault)
-        Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
+        RID = findTable(My.Settings.RobotInputDefault)
+        RI = findTable(My.Settings.RobotInput)
 
         'display data
         TableDGV.DataSource = RID._data
@@ -25,6 +24,7 @@ Public Class Driving
         TableDGV.ReadOnly = False
         TableDGV.Columns(KEY_COLUMN).ReadOnly = True
         TableDGV.AllowUserToAddRows = False
+        TableDGV.AllowUserToDeleteRows = False
     End Sub
 
 #End Region
@@ -32,26 +32,21 @@ Public Class Driving
 
 #Region "On Change"
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
+        RID = findTable(My.Settings.RobotInputDefault)
+        RI = findTable(My.Settings.RobotInput)
+
         If Me.InvokeRequired Then
             Logs(EventTable)
             Me.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
-            UpdateDispatch(EventTable)
+            UpdateInputKeys()
         End If
-    End Sub
-
-    Public Sub UpdateDispatch(EventTable As DotNetTable)
-        Select Case EventTable.name
-            Case My.Settings.RobotInputDefault
-                UpdateInputKeys()
-            Case My.Settings.RobotInput
-                UpdateInputValues()
-        End Select
     End Sub
 
     'on change for RobotInputsDefaults
     Public Sub UpdateInputKeys()
-
+        RID = findTable(My.Settings.RobotInputDefault)
+        RI = findTable(My.Settings.RobotInput)
         Dim DGVChanged As Boolean = False
 
         Dim spareKeys As List(Of String)
@@ -84,45 +79,39 @@ Public Class Driving
         End If
     End Sub
 
-    'on change for RobotInputs
-    Public Sub UpdateInputValues()
-        SaveToSettings() 'save updated values to settings
-    End Sub
-
     'save the robot inputs to settings
     Public Sub SaveToSettings()
-        Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
-        Dim Temp As New ListDictionary
-
-        'save the robot-inputs values to settings
-        For Each key In RI.Keys
-            If Temp.Contains(key) = False Then
-                Temp.Add(key, RI.getValue(key))
-            Else
-                Temp.Item(key) = RI.getValue(key)
-            End If
-        Next
-        My.Settings.RobotInputTable = Temp
-        My.Settings.Save()
+        RI = findTable(My.Settings.RobotInput)
+        Dim Temp As New DataTable
+        Dim FilePath As String = My.Application.Info.DirectoryPath & "\" & RI.name & ".xml"
+        Temp = RI._data
+        Temp.TableName = "Temp"
+        Try
+            Temp.WriteXml(FilePath, System.Data.XmlWriteMode.WriteSchema)
+        Catch
+        End Try
     End Sub
 
     'load the robot inputs to the table from settings
     Public Sub LoadFromSettings()
-        Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
-        Dim Temp As New ListDictionary
+        Dim temp As New DataTable
+        temp.TableName = "Temp"
+        RI = findTable(My.Settings.RobotInput)
+        Dim FilePath As String = My.Application.Info.DirectoryPath & "\" & RI.name & ".xml"
 
-        'update the robot-inputs table based on the current values
-        Temp = My.Settings.RobotInputTable
         Try
-            'update based on saved values
-            For Each key In Temp.Keys
-                If RI.exists(key) Then
-                    RI.setValue(key.ToString, Temp.Item(key.ToString).ToString)
-                End If
-            Next
-        Catch ex As NullReferenceException
-
+            'check that file exist and correct type
+            temp.ReadXml(FilePath)
+        Catch ex As Exception
+            Exit Sub
         End Try
+
+        'check for correct column names
+        If temp.Columns.Count = 2 Then
+            If temp.Columns(0).ColumnName = KEY_COLUMN And temp.Columns(1).ColumnName = VALUE_COLUMN Then
+                RI._data = temp
+            End If
+        End If
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
@@ -171,7 +160,7 @@ Public Class Driving
 
         RI.setValue(Key, Value)
         SendData(RI)
-
+        SaveToSettings() 'save updated values to settings
     End Sub
 
 
@@ -181,7 +170,7 @@ Public Class Driving
         Logs(SendTable)
     End Sub
 
-    Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteRowToolStripMenuItem.Click
+    Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs)
         'remove rows
         For Each row In TableDGV.SelectedRows
             Try
@@ -201,4 +190,5 @@ Public Class Driving
 
 #End Region
 
+ 
 End Class
