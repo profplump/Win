@@ -6,8 +6,7 @@ Imports System.IO
 
 Public Class DriversStation
     Public OpenTables As NewTable
-    Public MainControl As New Driving
-    Public ParameterTable1 As New ParameterTable
+    Public ParameterTable As New Driving
     Public OutputTables1 As New OutputTables
 
     'pre-determined tables
@@ -17,7 +16,7 @@ Public Class DriversStation
 
     Private Sub DriversStation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ModeSelect As New OpenControl
-        My.Settings.IP = "127.0.0.1"
+        'My.Settings.IP = "127.0.0.1"
         ModeSelect.StartButton(False, My.Settings.IP)
     End Sub
 
@@ -46,14 +45,14 @@ Public Class DriversStation
         'subscribe and publish to defaults
         GetTables()
         'display main output control
-        Me.FillPanel(MainControl, "Drivers Station in " & Mode)
+        Me.FillPanel(ParameterTable, "Drivers Station in " & Mode)
     End Sub
 
     Public Sub GetTables()
         'publish tables to robot
         RobotInputs = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
         'load existing table if any
-        ParameterTable1.SendOrSaveTable(True)
+        ParameterTable.LoadFromSettings()
 
         'Subscribe to robot tables
         'debug tables
@@ -63,8 +62,23 @@ Public Class DriversStation
 
         'input defaults
         RobotInputDefaults = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)
-        RobotInputDefaults.onChange(ParameterTable1)
-        RobotInputDefaults.onStale(ParameterTable1)
+        RobotInputDefaults.onChange(ParameterTable)
+        RobotInputDefaults.onStale(ParameterTable)
+
+        'subscribe/publish and show any other tables previously open
+        Try
+            For Each key In My.Settings.VisibleTables.Keys
+                OpenTables = New NewTable
+                OpenTables.TableNameTxt.Text = key
+                If My.Settings.VisibleTables.Item(key) = True Then
+                    OpenTables.Publish(True)
+                Else
+                    OpenTables.Subscribed(True)
+                End If
+            Next
+        Catch ex As NullReferenceException
+
+        End Try
     End Sub
 
     Private Sub OpenDebugToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDebugToolStripMenuItem.Click

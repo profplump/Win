@@ -6,12 +6,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="IP" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">127.0.0.1</Value>
     </Setting>
-    <Setting Name="PubTables" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="SubTables" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="VisibleTables" Type="System.Collections.Specialized.ListDictionary" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="OutputTables" Type="System.String" Scope="Application">

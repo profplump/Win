@@ -14,9 +14,9 @@ Public Class ParameterTable
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         table = EventTable
-        If DriversStation.MainControl.InvokeRequired Then
-            DriversStation.MainControl.Logs(EventTable)
-            DriversStation.MainControl.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
+        If DriversStation.ParameterTable.InvokeRequired Then
+            DriversStation.ParameterTable.Logs(EventTable)
+            DriversStation.ParameterTable.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
             UpdateDispatch()
         End If
@@ -56,24 +56,25 @@ Public Class ParameterTable
             DGVChanged = True
         Next
 
-        SendOrSaveTable(False)
-        'SendOrSaveTable(True)
+        'save table values to settings
+        SaveToSettings()
         ThreadPool.QueueUserWorkItem(AddressOf SendData, RI)
 
+        'update grid control
         If DGVChanged Then
-            DriversStation.MainControl.TableDGV.DataSource = RI._data
-            DriversStation.MainControl.Refresh()
+            DriversStation.ParameterTable.TableDGV.DataSource = RI._data
+            DriversStation.ParameterTable.Refresh()
         End If
     End Sub
 
     'on change for RobotInputs
     Public Sub UpdateInputValues()
-        SendOrSaveTable(False)
+        SaveToSettings() 'save updated values to settings
     End Sub
 
     Private Sub SendData(SendTable As DotNetTable)
         SendTable.send()
-        DriversStation.MainControl.Logs(SendTable)
+        DriversStation.ParameterTable.Logs(SendTable)
     End Sub
 
     Private Sub UpdateLabels()
@@ -83,34 +84,40 @@ Public Class ParameterTable
         DriversStation.ToolStripStatusStale.Text = ""
     End Sub
 
-    'load or save the robot inputs from/to settings
-    Public Sub SendOrSaveTable(Send As Boolean)
+    'save the robot inputs to settings
+    Public Sub SaveToSettings()
         Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
         Dim Temp As New ListDictionary
-        If Send = True Then
-            'update the robot-inputs table based on the current values
-            Temp = My.Settings.RobotInputTable
-            RI.clear() 'clear all existing values in table
-            Try
-                're-add based on saved values
-                For Each key In Temp.Keys
-                    RI.setValue(key.ToString, Temp.Item(key.ToString).ToString)
-                Next
-            Catch ex As NullReferenceException
 
-            End Try
-        Else
-            'save the robot-inputs values to settings
-            For Each key In RI.Keys
-                If Temp.Contains(key) = False Then
-                    Temp.Add(key, RI.getValue(key))
-                Else
-                    Temp.Item(key) = RI.getValue(key)
+        'save the robot-inputs values to settings
+        For Each key In RI.Keys
+            If Temp.Contains(key) = False Then
+                Temp.Add(key, RI.getValue(key))
+            Else
+                Temp.Item(key) = RI.getValue(key)
+            End If
+        Next
+        My.Settings.RobotInputTable = Temp
+        My.Settings.Save()
+    End Sub
+
+    'load the robot inputs to the table from settings
+    Public Sub LoadFromSettings()
+        Dim RI As DotNetTable = findTable(My.Settings.RobotInput)
+        Dim Temp As New ListDictionary
+
+        'update the robot-inputs table based on the current values
+        Temp = My.Settings.RobotInputTable
+        Try
+            'update based on saved values
+            For Each key In Temp.Keys
+                If RI.exists(key) Then
+                    RI.setValue(key.ToString, Temp.Item(key.ToString).ToString)
                 End If
             Next
-            My.Settings.RobotInputTable = Temp
-            My.Settings.Save()
-        End If
+        Catch ex As NullReferenceException
+
+        End Try
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale

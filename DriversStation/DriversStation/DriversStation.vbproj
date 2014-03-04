@@ -103,7 +103,6 @@
     </Compile>
     <Compile Include="OutputTables.vb" />
     <Compile Include="ParameterTable.vb" />
-    <Compile Include="Settings.vb" />
     <Compile Include="Tables.vb">
       <SubType>Form</SubType>
     </Compile>

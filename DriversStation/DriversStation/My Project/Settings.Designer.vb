@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("127.0.0.1")>  _
         Public Property IP() As String
             Get
                 Return CType(Me("IP"),String)
@@ -78,25 +78,14 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property PubTables() As Global.System.Collections.Specialized.StringCollection
+        <Global.System.Configuration.UserScopedSettingAttribute(), _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()> _
+        Public Property VisibleTables() As Global.System.Collections.Specialized.ListDictionary
             Get
-                Return CType(Me("PubTables"),Global.System.Collections.Specialized.StringCollection)
+                Return CType(Me("VisibleTables"), Global.System.Collections.Specialized.ListDictionary)
             End Get
-            Set
-                Me("PubTables") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Property SubTables() As Global.System.Collections.Specialized.StringCollection
-            Get
-                Return CType(Me("SubTables"),Global.System.Collections.Specialized.StringCollection)
-            End Get
-            Set
-                Me("SubTables") = value
+            Set(value As Global.System.Collections.Specialized.ListDictionary)
+                Me("VisibleTables") = value
             End Set
         End Property
         

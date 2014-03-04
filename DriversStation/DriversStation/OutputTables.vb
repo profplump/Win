@@ -15,9 +15,9 @@ Public Class OutputTables
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
         OutputTable = EventTable
-        If DriversStation.MainControl.InvokeRequired Then
-            DriversStation.MainControl.Logs(EventTable)
-            DriversStation.MainControl.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
+        If DriversStation.ParameterTable.InvokeRequired Then
+            DriversStation.ParameterTable.Logs(EventTable)
+            DriversStation.ParameterTable.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
             SubscribeOutputTables()
         End If

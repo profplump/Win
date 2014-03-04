@@ -37,10 +37,6 @@ Public Class Tables
 
         If Table.iswritable = True Then
             Me.Text = "Published " & DisplayName
-            'add to settings 
-            If My.Settings.PubTables.Contains(Table.name) = False Then
-                My.Settings.PubTables.Add(Table.name)
-            End If
             'show published controls 'hiding for now
             Label1.Visible = False
             IntervalBtn.Visible = False
@@ -62,10 +58,6 @@ Public Class Tables
             TableDGV.ReadOnly = False
         Else
             Me.Text = "Subscribed to " & DisplayName
-            'add to settings
-            If My.Settings.SubTables.Contains(Table.name) = False Then
-                My.Settings.SubTables.Add(Table.name)
-            End If
             'hide published controls
             Label1.Visible = False
             IntervalBtn.Visible = False
@@ -74,8 +66,11 @@ Public Class Tables
             TableDGV.ReadOnly = True
         End If
 
-        'update settings
-
+        'add to settings
+        If My.Settings.VisibleTables.Contains(Table.name) = False Then
+            My.Settings.VisibleTables.Add(Table.name, Table.iswritable)
+            My.Settings.Save()
+        End If
     End Sub
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
@@ -120,6 +115,10 @@ Public Class Tables
 
         Key = TableDGV.CurrentRow.Cells("Key").Value
         Value = TableDGV.CurrentRow.Cells("Value").Value
+
+        If Key Is Nothing Or Value Is Nothing Then
+            Exit Sub
+        End If
 
         If Key <> "" Then
             If Table.exists(Key) = True Then
@@ -180,8 +179,11 @@ Public Class Tables
     End Sub
 
     Private Sub Tables_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        'update settings
-
+        'remove from list of visible tables
+        If My.Settings.VisibleTables.Contains(Table.name) = False Then
+            My.Settings.VisibleTables.Remove(Table.name)
+            My.Settings.Save()
+        End If
     End Sub
 
 End Class
