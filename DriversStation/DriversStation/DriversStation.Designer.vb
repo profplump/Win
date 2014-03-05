@@ -33,11 +33,11 @@ Partial Class DriversStation
         Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
         Me.MainPanel = New System.Windows.Forms.Panel()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
-        Me.ToolStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelLast = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabelInterval = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusStale = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatus = New System.Windows.Forms.ToolStripStatusLabel()
         Me.MenuStrip1.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -118,12 +118,6 @@ Partial Class DriversStation
         Me.StatusStrip1.TabIndex = 2
         Me.StatusStrip1.Text = "StatusStrip1"
         '
-        'ToolStripStatus
-        '
-        Me.ToolStripStatus.Name = "ToolStripStatus"
-        Me.ToolStripStatus.Size = New System.Drawing.Size(164, 17)
-        Me.ToolStripStatus.Text = "Drivers Station in Client Mode"
-        '
         'ToolStripStatusLabelLast
         '
         Me.ToolStripStatusLabelLast.Name = "ToolStripStatusLabelLast"
@@ -138,6 +132,7 @@ Partial Class DriversStation
         '
         'ToolStripStatusStale
         '
+        Me.ToolStripStatusStale.ForeColor = System.Drawing.Color.Red
         Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
         Me.ToolStripStatusStale.Size = New System.Drawing.Size(46, 17)
         Me.ToolStripStatusStale.Text = "             "
@@ -147,6 +142,12 @@ Partial Class DriversStation
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
         Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(148, 17)
         Me.ToolStripStatusLabel1.Text = "                                               "
+        '
+        'ToolStripStatus
+        '
+        Me.ToolStripStatus.Name = "ToolStripStatus"
+        Me.ToolStripStatus.Size = New System.Drawing.Size(164, 17)
+        Me.ToolStripStatus.Text = "Drivers Station in Client Mode"
         '
         'DriversStation
         '

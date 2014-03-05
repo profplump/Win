@@ -13,6 +13,11 @@ Public Class Driving
     Public RID As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
+    Const FeedbackKey As String = "FeedbackKey"
+    Const RecFeedbackKey As String = "RecFeedbackKey"
+    Public FeedbackValue As Integer = 0
+    Public FeedbackStale As Boolean
+
 #Region "Load"
     Private Sub Driving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RID = findTable(My.Settings.RobotInputDefault)
@@ -68,6 +73,23 @@ Public Class Driving
             DGVChanged = True
         Next
 
+        'check for feedback loop key/value
+        If RID.exists(RecFeedbackKey) Then
+            RI.setValue(RecFeedbackKey, RID.getValue(RecFeedbackKey))
+        End If
+
+        If RID.exists(FeedbackKey) Then
+            If RID.getValue(FeedbackKey) - FeedbackValue > 2 Then 'constant
+                'out of date
+                FeedbackStale = True
+            Else
+                FeedbackStale = False
+            End If
+        Else
+            FeedbackStale = True
+        End If
+
+
         'save table values to settings
         SaveToSettings()
         ThreadPool.QueueUserWorkItem(AddressOf SendData, RI)
@@ -115,7 +137,7 @@ Public Class Driving
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
-
+        DriversStation.ToolStripStatusStale.Text = "Table is stale."
     End Sub
 
     Private Sub UpdateLabels()
@@ -165,9 +187,17 @@ Public Class Driving
 
 
     Private Sub SendData(SendTable As DotNetTable)
+        FeedbackLoop()
         SendTable.send()
         UpdateLabels()
         Logs(SendTable)
+    End Sub
+
+    Public Sub FeedbackLoop()
+        RI = findTable(My.Settings.RobotInput)
+
+        FeedbackValue = (CInt(FeedbackValue) + 1).ToString
+        RI.setValue(My.Settings.FeedbackKey, FeedbackValue)
     End Sub
 
     Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs)

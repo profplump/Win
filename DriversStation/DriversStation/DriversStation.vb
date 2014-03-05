@@ -53,6 +53,8 @@ Public Class DriversStation
         RobotInputs = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
         'load existing table if any
         ParameterTable.LoadFromSettings()
+        'set update interval
+        RobotInputs.setInterval(5000)
 
         'Subscribe to robot tables
         'debug tables
