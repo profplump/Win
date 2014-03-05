@@ -127,30 +127,6 @@ Namespace My
                 Me("DebugMode") = value
             End Set
         End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("FeedbackKey")> _
-        Public Property FeedbackKey() As String
-            Get
-                Return CType(Me("FeedbackKey"), String)
-            End Get
-            Set(value As String)
-                Me("FeedbackKey") = value
-            End Set
-        End Property
-
-        <Global.System.Configuration.UserScopedSettingAttribute(), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("RecievedLoop")> _
-        Public Property RecievedLoop() As String
-            Get
-                Return CType(Me("RecievedLoop"), String)
-            End Get
-            Set(value As String)
-                Me("RecievedLoop") = value
-            End Set
-        End Property
     End Class
 End Namespace
 

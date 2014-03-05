@@ -132,6 +132,7 @@ Partial Class DriversStation
         '
         'ToolStripStatusStale
         '
+        Me.ToolStripStatusStale.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ToolStripStatusStale.ForeColor = System.Drawing.Color.Red
         Me.ToolStripStatusStale.Name = "ToolStripStatusStale"
         Me.ToolStripStatusStale.Size = New System.Drawing.Size(46, 17)
@@ -140,8 +141,8 @@ Partial Class DriversStation
         'ToolStripStatusLabel1
         '
         Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(148, 17)
-        Me.ToolStripStatusLabel1.Text = "                                               "
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(118, 17)
+        Me.ToolStripStatusLabel1.Text = "                                     "
         '
         'ToolStripStatus
         '

@@ -23,13 +23,7 @@ Public Class Driving
         RID = findTable(My.Settings.RobotInputDefault)
         RI = findTable(My.Settings.RobotInput)
 
-        'display data
-        TableDGV.DataSource = RID._data
-        'enable editing
-        TableDGV.ReadOnly = False
-        TableDGV.Columns(KEY_COLUMN).ReadOnly = True
-        TableDGV.AllowUserToAddRows = False
-        TableDGV.AllowUserToDeleteRows = False
+        UpdateDGV()
     End Sub
 
 #End Region
@@ -79,7 +73,7 @@ Public Class Driving
         End If
 
         If RID.exists(FeedbackKey) Then
-            If RID.getValue(FeedbackKey) - FeedbackValue > 2 Then 'constant
+            If FeedbackValue - RID.getValue(FeedbackKey) > 2 Then 'constant
                 'out of date
                 FeedbackStale = True
             Else
@@ -94,12 +88,36 @@ Public Class Driving
         SaveToSettings()
         ThreadPool.QueueUserWorkItem(AddressOf SendData, RI)
 
+        DisplayStaleState(RI)
+
         'update grid control
         If DGVChanged Then
-            TableDGV.DataSource = RI._data
-            Me.Refresh()
+            UpdateDGV()
         End If
+
     End Sub
+
+    Public Sub UpdateDGV()
+        'Display data
+        TableDGV.DataSource = RI._data
+
+        'Enable editing of values
+        TableDGV.ReadOnly = False
+        TableDGV.Columns(KEY_COLUMN).ReadOnly = True
+        TableDGV.AllowUserToAddRows = False
+        TableDGV.AllowUserToDeleteRows = False
+
+        'Disable editing of special keys
+        For Each row As DataGridViewRow In TableDGV.Rows
+            Dim key As String = row.Cells(KEY_COLUMN).Value
+            If (key = FeedbackKey Or key = DotNetTable.UPDATE_INTERVAL) Then
+                row.ReadOnly = True
+            End If
+        Next
+
+        Me.Refresh()
+    End Sub
+
 
     'save the robot inputs to settings
     Public Sub SaveToSettings()
@@ -137,14 +155,27 @@ Public Class Driving
     End Sub
 
     Public Sub stale(table As DotNetTable) Implements DotNetTableEvents.stale
-        DriversStation.ToolStripStatusStale.Text = "Table is stale."
+        DisplayStaleState(table)
     End Sub
 
     Private Sub UpdateLabels()
         Dim StartDate As New DateTime(1970, 1, 1)
         DriversStation.ToolStripStatusLabelInterval.Text = "UpdateInterval: " & RID.getInterval & " |"
         DriversStation.ToolStripStatusLabelLast.Text = "Last Update: " & StartDate.AddMilliseconds(RID.lastUpdate) & " |"
-        DriversStation.ToolStripStatusStale.Text = ""
+    End Sub
+
+    Public Sub DisplayStaleState(table As DotNetTable)
+        If Me.InvokeRequired Then
+            Me.Invoke(New UpdateDelegate(AddressOf DisplayStaleState), table)
+        Else
+            If FeedbackStale = True Or table.isStale = True Then
+                DriversStation.ToolStripStatusStale.Text = "Table is stale."
+                TableDGV.BackgroundColor = Color.MistyRose
+            Else
+                DriversStation.ToolStripStatusStale.Text = ""
+                TableDGV.BackgroundColor = Color.FromKnownColor(KnownColor.AppWorkspace)
+            End If
+        End If
     End Sub
 
     Public Sub Logs(TableData As DotNetTable)
@@ -196,8 +227,8 @@ Public Class Driving
     Public Sub FeedbackLoop()
         RI = findTable(My.Settings.RobotInput)
 
-        FeedbackValue = (CInt(FeedbackValue) + 1).ToString
-        RI.setValue(My.Settings.FeedbackKey, FeedbackValue)
+        FeedbackValue += 1
+        RI.setValue(FeedbackKey, FeedbackValue)
     End Sub
 
     Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs)

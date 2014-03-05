@@ -23,11 +23,5 @@
     <Setting Name="DebugMode" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="FeedbackKey" Type="System.String" Scope="User">
-      <Value Profile="(Default)">FeedbackKey</Value>
-    </Setting>
-    <Setting Name="RecievedLoop" Type="System.String" Scope="User">
-      <Value Profile="(Default)">RecievedLoop</Value>
-    </Setting>
   </Settings>
 </SettingsFile>
