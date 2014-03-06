@@ -25,8 +25,6 @@ Partial Class DriversStation
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenDebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AddInputToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ShowAllToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -44,7 +42,7 @@ Partial Class DriversStation
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.TablesToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.TablesToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(642, 24)
@@ -61,25 +59,13 @@ Partial Class DriversStation
         'OpenDebugToolStripMenuItem
         '
         Me.OpenDebugToolStripMenuItem.Name = "OpenDebugToolStripMenuItem"
-        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OpenDebugToolStripMenuItem.Text = "&New Table"
-        '
-        'EditToolStripMenuItem
-        '
-        Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddInputToolStripMenuItem})
-        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
-        Me.EditToolStripMenuItem.Text = "Edit"
-        '
-        'AddInputToolStripMenuItem
-        '
-        Me.AddInputToolStripMenuItem.Name = "AddInputToolStripMenuItem"
-        Me.AddInputToolStripMenuItem.Size = New System.Drawing.Size(127, 22)
-        Me.AddInputToolStripMenuItem.Text = "Add Input"
         '
         'TablesToolStripMenuItem
         '
         Me.TablesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowAllToolStripMenuItem1, Me.ToolStripSeparator1, Me.ToolStripTextBox1})
+        Me.TablesToolStripMenuItem.Enabled = False
         Me.TablesToolStripMenuItem.Name = "TablesToolStripMenuItem"
         Me.TablesToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
         Me.TablesToolStripMenuItem.Text = "Tables"
@@ -174,8 +160,6 @@ Partial Class DriversStation
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MainPanel As System.Windows.Forms.Panel
     Friend WithEvents OpenDebugToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AddInputToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ShowAllToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator

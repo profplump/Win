@@ -13,8 +13,9 @@ Public Class Driving
     Public RID As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
-    Const FeedbackKey As String = "FeedbackKey"
-    Const RecFeedbackKey As String = "RecFeedbackKey"
+    Const DriverFeedbackKey As String = "_DRIVER_FEEDBACK_KEY"
+    Const RobotFeedbackKey As String = "_ROBOT_FEEDBACK_KEY"
+    Const OutofDate As Integer = 2
     Public FeedbackValue As Integer = 0
     Public FeedbackStale As Boolean
 
@@ -68,12 +69,12 @@ Public Class Driving
         Next
 
         'check for feedback loop key/value
-        If RID.exists(RecFeedbackKey) Then
-            RI.setValue(RecFeedbackKey, RID.getValue(RecFeedbackKey))
+        If RID.exists(RobotFeedbackKey) Then
+            RI.setValue(RobotFeedbackKey, RID.getValue(RobotFeedbackKey))
         End If
 
-        If RID.exists(FeedbackKey) Then
-            If FeedbackValue - RID.getValue(FeedbackKey) > 2 Then 'constant
+        If RID.exists(DriverFeedbackKey) Then
+            If FeedbackValue - RID.getValue(DriverFeedbackKey) > OutofDate Then 'constant
                 'out of date
                 FeedbackStale = True
             Else
@@ -110,7 +111,7 @@ Public Class Driving
         'Disable editing of special keys
         For Each row As DataGridViewRow In TableDGV.Rows
             Dim key As String = row.Cells(KEY_COLUMN).Value
-            If (key = FeedbackKey Or key = DotNetTable.UPDATE_INTERVAL) Then
+            If (key = DriverFeedbackKey Or key = DotNetTable.UPDATE_INTERVAL) Then
                 row.ReadOnly = True
             End If
         Next
@@ -228,7 +229,7 @@ Public Class Driving
         RI = findTable(My.Settings.RobotInput)
 
         FeedbackValue += 1
-        RI.setValue(FeedbackKey, FeedbackValue)
+        RI.setValue(DriverFeedbackKey, FeedbackValue)
     End Sub
 
     Private Sub DeleteRowToolStripMenuItem_Click(sender As Object, e As EventArgs)

@@ -16,7 +16,7 @@ Public Class DriversStation
 
     Private Sub DriversStation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim ModeSelect As New OpenControl
-        'My.Settings.IP = "127.0.0.1"
+        My.Settings.IP = "4030"
         ModeSelect.StartButton(False, My.Settings.IP)
     End Sub
 
@@ -54,7 +54,7 @@ Public Class DriversStation
         'load existing table if any
         ParameterTable.LoadFromSettings()
         'set update interval
-        RobotInputs.setInterval(5000)
+        RobotInputs.setInterval(1000)
 
         'Subscribe to robot tables
         'debug tables
