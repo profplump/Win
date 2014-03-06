@@ -46,9 +46,9 @@ Partial Class Tables
         '
         Me.TableDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.TableDGV.ContextMenuStrip = Me.ContextMenuStrip1
-        Me.TableDGV.Location = New System.Drawing.Point(12, 12)
+        Me.TableDGV.Location = New System.Drawing.Point(12, 40)
         Me.TableDGV.Name = "TableDGV"
-        Me.TableDGV.Size = New System.Drawing.Size(610, 323)
+        Me.TableDGV.Size = New System.Drawing.Size(610, 295)
         Me.TableDGV.TabIndex = 0
         '
         'ContextMenuStrip1
@@ -138,7 +138,7 @@ Partial Class Tables
         'NewTableToolStripMenuItem
         '
         Me.NewTableToolStripMenuItem.Name = "NewTableToolStripMenuItem"
-        Me.NewTableToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.NewTableToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.NewTableToolStripMenuItem.Text = "&New Table"
         '
         'Tables

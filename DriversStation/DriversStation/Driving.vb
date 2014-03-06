@@ -11,6 +11,7 @@ Public Class Driving
 
     Public RI As DotNetTable
     Public RID As DotNetTable
+    Public Indicators As DotNetTable
     Delegate Sub UpdateDelegate(DelTable As DotNetTable)
 
     Const DriverFeedbackKey As String = "_DRIVER_FEEDBACK_KEY"
@@ -21,8 +22,11 @@ Public Class Driving
 
 #Region "Load"
     Private Sub Driving_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        RID = findTable(My.Settings.RobotInputDefault)
-        RI = findTable(My.Settings.RobotInput)
+        RID = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)
+        RI = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
+
+        'Indicators = findTable("")
+        'Indicators.onChange(Me)
 
         UpdateDGV()
     End Sub
@@ -32,21 +36,44 @@ Public Class Driving
 
 #Region "On Change"
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
-        RID = findTable(My.Settings.RobotInputDefault)
-        RI = findTable(My.Settings.RobotInput)
+        RID = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)
+        RI = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
 
         If Me.InvokeRequired Then
             Logs(EventTable)
             Me.Invoke(New UpdateDelegate(AddressOf changed), EventTable)
         Else
-            UpdateInputKeys()
+                UpdateInputKeys()
         End If
     End Sub
 
+    'on change for indicators
+    'Public Sub UpdateIndicators()
+    '    If Indicators.exists("Left Turret") Then
+    '        Dim LeftVal As String = Indicators.getValue("Left Turret")
+    '        If LeftVal = "something" Then
+    '            LeftTurret.BackColor = Color.MistyRose
+    '        Else
+    '            LeftTurret.BackColor = Color.PaleGreen
+    '        End If
+    '    End If
+
+    '    If Indicators.exists("Left Turret") Then
+    '        Dim LeftVal As String = Indicators.getValue("Left Turret")
+    '        If LeftVal = "something" Then
+    '            LeftTurret.BackColor = Color.MistyRose
+    '        Else
+    '            LeftTurret.BackColor = Color.PaleGreen
+    '        End If
+    '    End If
+
+    'End Sub
+
+
     'on change for RobotInputsDefaults
     Public Sub UpdateInputKeys()
-        RID = findTable(My.Settings.RobotInputDefault)
-        RI = findTable(My.Settings.RobotInput)
+        RID = DotNetTables.DotNetTables.subscribe(My.Settings.RobotInputDefault)
+        RI = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
         Dim DGVChanged As Boolean = False
 
         Dim spareKeys As List(Of String)
@@ -111,7 +138,7 @@ Public Class Driving
         'Disable editing of special keys
         For Each row As DataGridViewRow In TableDGV.Rows
             Dim key As String = row.Cells(KEY_COLUMN).Value
-            If (key = DriverFeedbackKey Or key = DotNetTable.UPDATE_INTERVAL) Then
+            If key.StartsWith("_") Then
                 row.ReadOnly = True
             End If
         Next
@@ -122,7 +149,7 @@ Public Class Driving
 
     'save the robot inputs to settings
     Public Sub SaveToSettings()
-        RI = findTable(My.Settings.RobotInput)
+        RI = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
         Dim Temp As New DataTable
         Dim FilePath As String = My.Application.Info.DirectoryPath & "\" & RI.name & ".xml"
         Temp = RI._data
@@ -226,7 +253,7 @@ Public Class Driving
     End Sub
 
     Public Sub FeedbackLoop()
-        RI = findTable(My.Settings.RobotInput)
+        RI = DotNetTables.DotNetTables.publish(My.Settings.RobotInput)
 
         FeedbackValue += 1
         RI.setValue(DriverFeedbackKey, FeedbackValue)
@@ -253,4 +280,5 @@ Public Class Driving
 #End Region
 
  
+  
 End Class

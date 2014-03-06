@@ -67,10 +67,10 @@ Public Class Tables
         End If
 
         'add to settings
-        If My.Settings.VisibleTables.Contains(Table.name) = False Then
-            My.Settings.VisibleTables.Add(Table.name, Table.iswritable)
-            My.Settings.Save()
-        End If
+        'If My.Settings.VisibleTables.Contains(Table.name) = False Then
+        '    My.Settings.VisibleTables.Add(Table.name, Table.iswritable)
+        '    My.Settings.Save()
+        'End If
     End Sub
 
     Public Sub changed(EventTable As DotNetTable) Implements DotNetTableEvents.changed
@@ -172,18 +172,17 @@ Public Class Tables
     End Sub
 
     Private Sub NewTableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewTableToolStripMenuItem.Click
-        If DriversStation.OpenTables Is Nothing Then
-            DriversStation.OpenTables = New NewTable
-        End If
+        DriversStation.OpenTables = New NewTable
         DriversStation.OpenTables.Show()
     End Sub
 
     Private Sub Tables_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         'remove from list of visible tables
-        If My.Settings.VisibleTables.Contains(Table.name) = False Then
-            My.Settings.VisibleTables.Remove(Table.name)
-            My.Settings.Save()
-        End If
+        'If My.Settings.VisibleTables.Contains(Table.name) = False Then
+        '    My.Settings.VisibleTables.Remove(Table.name)
+        '    My.Settings.Save()
+        'End If
+        'Me.Close()
     End Sub
 
 End Class

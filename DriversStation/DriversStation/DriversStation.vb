@@ -68,30 +68,30 @@ Public Class DriversStation
         RobotInputDefaults.onStale(ParameterTable)
 
         'subscribe/publish and show any other tables previously open
-        Try
-            For Each key In My.Settings.VisibleTables.Keys
-                OpenTables = New NewTable
-                OpenTables.TableNameTxt.Text = key
-                If My.Settings.VisibleTables.Item(key) = True Then
-                    OpenTables.Publish(True)
-                Else
-                    OpenTables.Subscribed(True)
-                End If
-            Next
-        Catch ex As NullReferenceException
+        'Try
+        '    For Each key In My.Settings.VisibleTables.Keys
+        '        OpenTables = New NewTable
+        '        OpenTables.TableNameTxt.Text = key
+        '        If My.Settings.VisibleTables.Item(key) = True Then
+        '            OpenTables.Publish(True)
+        '        Else
+        '            OpenTables.Subscribed(True)
+        '        End If
+        '    Next
+        'Catch ex As NullReferenceException
 
-        End Try
+        'End Try
     End Sub
 
     Private Sub OpenDebugToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDebugToolStripMenuItem.Click
-        If OpenTables Is Nothing Then
-            OpenTables = New NewTable
-        End If
+        OpenTables = New NewTable
         OpenTables.Show()
     End Sub
 
     Private Sub DriversStation_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         End
     End Sub
+
+    'Update menu
 
 End Class

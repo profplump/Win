@@ -59,7 +59,7 @@ Partial Class DriversStation
         'OpenDebugToolStripMenuItem
         '
         Me.OpenDebugToolStripMenuItem.Name = "OpenDebugToolStripMenuItem"
-        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenDebugToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.OpenDebugToolStripMenuItem.Text = "&New Table"
         '
         'TablesToolStripMenuItem
